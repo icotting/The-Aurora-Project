@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="./resources/templates/app.xhtml">
+
+	<ui:define name="styles">
+		<link rel="stylesheet" type="text/css"
+			href="../resources/styles/dailydispatch.css" />
+			
+		<style>			
+			#unlRail path {
+				fill: none;
+    			stroke-opacity: .75;
+  				stroke-width: 1px;				
+  				shape-rendering: crispEdges;
+			}
+			
+			.Test .redColor {
+  				stroke: rgb(242, 22, 22);
+			}
+
+			.Test2 .redColor {
+  				stroke: rgb(22, 242, 200);
+			}
+												
+			#ukRail path {
+				fill: none;
+  				stroke: rgb(105, 54, 168);
+  				stroke-opacity: .75;
+  				stroke-width: 1px;
+  				shape-rendering: crispEdges;
+			}
+			
+			
+			#states path {
+				fill: none;
+  				stroke: #000;
+  				stroke-opacity: .40;
+  				shape-rendering: crispEdges;
+  				stroke-width: 1.25px;
+			}
+			
+			#counties path {
+				fill: none;
+  				stroke: #000;
+  				stroke-opacity: .40;
+  				shape-rendering: crispEdges;
+  				stroke-width: 0.75px;
+			}
+			
+		</style>
+			
+	</ui:define>
+
+	<ui:define name="scripts">
+		<script type="text/javascript" src="../resources/js/polymaps.min.js"></script>
+		<script type="text/javascript" src="../resources/js/common.js"></script>
+		<script type="text/javascript" src="../resources/js/railroads.js"></script>
+	</ui:define>
+
+	<ui:define name="appNav">
+		<a href="" class="selectednav">Railroad Network Connectivity</a><a href="">Scholarly Interpretation</a><a href="">Developer Resources</a><a href="">About the Data</a>
+	</ui:define>
+
+	<ui:define name="pageMap">
+			<div class="mapBorder" style="width: 1000px; height: 430px;" id="map"></div>
+			<div id="slider"></div>
+			<br/><span style="font-size: 8pt;" id="dateText">1845</span>			
+	</ui:define>
+	
+	<ui:define name="pageContent">
+			<f:view contentType="text/html">
+				<img id="waitInidcator" style="display: none;" src="../resources/images/wait.gif"/>
+				<input type="button" onclick="change()" value="Color shift"/>
+			</f:view>
+	</ui:define>
+
+	<ui:define name="ribbon">
+		Show network data from the following sources
+		<p><input onchange="changeNetwork()" type="checkbox" checked="checked" id="unlRail"/>&nbsp;University of Nebraska</p>
+		<p><input onchange="changeNetwork()" type="checkbox" checked="checked" id="ukRail"/>&nbsp;University of Portsmouth</p>
+	</ui:define>
+
+</ui:composition>
+
+</html>

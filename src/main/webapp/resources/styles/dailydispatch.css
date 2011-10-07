@@ -1,0 +1,56 @@
+#text p { line-height: 150%; }
+
+.placehighlight {
+	background-color: #99b3cc;
+	padding: 2px;
+}
+
+.constrainthighlight {
+	background-color: #a5cc99;
+	padding: 2px;	
+}
+
+#slider { 
+	margin-top: 20px;
+	width: 750px;
+	position: relative; 
+	left: 130px;
+}
+
+#datepicker { 
+	position: relative;
+	left: -30px;
+	top: -53px;
+}
+
+.ui-datepicker {
+	font-size: 8pt;
+}
+
+
+#chart { 
+	width: 700px; height: 400px;
+	float: right;
+	margin-right: 20px;
+}
+
+#map {
+	width: 100%;
+	height: 350px;
+	margin-top: 0px;
+	padding-top: 0px;
+}
+
+.occurrence { 
+	margin-bottom: 20px;	
+}
+
+.alt {
+	margin-top: 10px;
+}
+
+.placeName { 
+	width: 300px;	
+}
+
+#stage { font-size: 10pt; }

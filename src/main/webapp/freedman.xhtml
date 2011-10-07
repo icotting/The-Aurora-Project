@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="./resources/templates/app.xhtml">
+
+	<ui:define name="styles">
+		<link rel="stylesheet" type="text/css"
+			href="../resources/styles/dailydispatch.css" />			
+	</ui:define>
+
+	<ui:define name="scripts">
+		<script type="text/javascript" src="../resources/js/polymaps.min.js"></script>
+		<script type="text/javascript"
+			src="../resources/js/highcharts/highcharts.js"></script>
+		<script type="text/javascript"
+			src="../resources/js/highcharts/exporting.js"></script>
+
+
+		<script type="text/javascript" src="../resources/js/common.js"></script>
+		<script type="text/javascript" src="../resources/js/freedman.js"></script>
+
+	</ui:define>
+
+	<ui:define name="appNav">
+		<a href="" class="selectednav">African American Mobility After
+			Emancipation</a>
+		<a href="">Scholarly Interpretation</a>
+		<a href="">Developer Resources</a>
+		<a href="">About the Data</a>
+	</ui:define>
+
+	<ui:define name="pageMap">
+		<div class="mapBorder" style="width: 1000px; height: 430px; margin-bottom: 10px;" id="map"></div>
+		
+		<div class="timeline" align="center">
+			<div id="cursor">
+				<img src="resources/images/cursor.png" alt="cursor" />
+			</div>
+			<img src="resources/images/timeline.png" alt="timeline" />
+			<div id="number"></div>
+		<span style="font-size: 8pt;" id="dateText"></span>		
+		</div>
+	</ui:define>
+
+	<ui:define name="pageContent">
+		<f:view contentType="text/html">
+
+			<div id="chart"></div>
+
+		</f:view>
+	</ui:define>
+
+	<ui:define name="ribbon">
+		<div id="datepicker"></div>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>

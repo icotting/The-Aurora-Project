@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:body>
+	<h:head>
+		<title>The Aurora Project</title>
+		<ui:insert name="styles"></ui:insert>	
+		<link rel="stylesheet" type="text/css"
+			href="../resources/styles/page.css" />
+
+		<link rel="stylesheet" type="text/css"
+			href="../resources/styles/jquery-ui-1.8.6.custom.css" />
+	
+		<script type="text/javascript" src="../resources/js/jquery-1.6.2.js"></script>
+		<script type="text/javascript" src="../resources/js/jquery-ui-1.8.6.custom.min.js"></script>
+		<ui:insert name="scripts"></ui:insert>			
+	</h:head>
+
+	<div id="header"><img src="../resources/images/globe.png" />
+	<h1>The Aurora Project</h1>
+	<span>History in Four Dimensions</span></div>
+
+	<div id="page">
+
+	<div id="pageBody"><ui:insert name="pageBody">
+			Insert Page Body Here
+	</ui:insert></div>
+	</div>
+
+	<h:messages />
+</h:body>
+</html>

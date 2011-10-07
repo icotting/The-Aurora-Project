@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="./resources/templates/page.xhtml">
+
+	<ui:define name="styles">
+		<link rel="stylesheet" type="text/css"
+			href="../resources/styles/dailydispatch.css" />
+	</ui:define>
+
+	<ui:define name="scripts">
+		<script type="text/javascript"
+			src="http://maps.google.com/maps/api/js?sensor=false"></script>
+				
+		<script type="text/javascript" src="../resources/js/dispatchAuthor.js"></script>
+
+		
+	</ui:define>
+
+	<ui:define name="pageBody">
+		<div id="canvas">
+		<f:view contentType="text/html">
+			<div>
+			<div id="placeCol" style="float: left; padding-top: 50px; padding-bottom: 20px; padding-left: 10px;">
+
+			</div>
+			<div style="float: right; border-left: 1px solid #eeeeee; width: 60%; padding-top: 10px; padding-left: 20px; height: 750px;">
+				<h3>Place Information</h3>
+				<div style="float: left; width: 50%;">
+					Place Key: <span id="infoKey"></span><br/>
+					Place Name: <div class="placeName"><span id="infoName"></span></div>
+					<span id="goecodeLink"></span>
+					<p>
+					Notes:<br/>
+					<textarea id="notes" rows="6" cols="35"></textarea>
+					</p>
+				</div>
+				<div style="float: right; padding-right: 30px;">
+					<p><input onblur="updateCoord()" type="text" id="lat" name="lat"/>	<label for="lat">Latitude</label></p>
+					<p><input onblur="updateCoord()" type="text" id="lon" name="lon"/> <label for="lon">Longitude</label></p>
+					<span style="font-weight: bold;">Update Actions:</span>
+					<p><input type="radio" name="option" value="Delete Point"/> <label for="a">Delete Point</label></p>
+					<p><input type="radio" name="option" value="No Action"/> <label for="b">Reviewed Point - No further action</label></p>
+					<p><input type="radio" name="option" value="Needs Additional Review"/> <label for="c">Reviewed Point - Needs additional review</label></p>
+				</div>
+				<div style="clear: both;" id="postButton"></div>
+				<div id="map" style="width: 500px; height: 400px; margin-top: 20px;"></div>
+			</div>
+			<div style="clear: both"></div>
+			<div style="margin-top: 20px; margin-bottom: 20px; padding-left: 10px; padding-right: 20px;">
+				<h3>Occurrences:</h3>
+				<div id="occurrences">
+				
+				</div>
+			</div>				
+			</div>
+		
+			<div id="stage">
+	
+			</div>
+		</f:view>
+		</div>
+	</ui:define>
+</ui:composition>
+
+</html>

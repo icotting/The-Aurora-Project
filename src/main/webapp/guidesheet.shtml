@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+
+<!--[if IE]>
+<style type="text/css">
+    .content{
+        top:0px;
+    }
+    
+    .footer{
+        top:0px;
+    }
+</style>
+<![endif]-->
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>the Aurora Project | four dimentions of history</title>
+</head>
+
+<body>
+<div align="center">
+	<div class="content" align="center">
+    	<div class="leftCol logo">
+        <!-- Primary logo, link back to homepage -->
+            <a href=""><img src="images/logo.png" alt="the Aurora Project" border="0" /></a>
+		</div>
+        <div class="rightCol" align="left">
+        <!-- main navigation -->
+			<div class="search"><form><input type="text" /></form></div>
+	        <img src="images/logoText.png" alt="the Aurora Project" border="0" />
+		</div>
+        <div style="clear:both"></div>
+        
+        <!-- make this any height you want. If it's not in an iframe, use the class "mapBorder" -->
+        <iframe width="1000" height="430" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/?ie=UTF8&amp;ll=36.031332,-37.792969&amp;spn=59.621654,175.957031&amp;z=3&amp;output=embed"></iframe>
+
+        <div class="navigation" align="right"><a href="">Nav link</a><a href="">Nav link</a><a href="">Nav link</a></div>
+
+        <div class="leftCol">
+            Title
+            <ul>
+                <li><a href="">Link</a></li>
+                <li>list</li>
+            </ul>
+            
+            Text text text
+            <br />
+            <a href="">Link</a>
+                    
+        </div>
+        
+        <!-- single col layout -->
+        <div class="rightCol" align="left">
+        
+            <h1>heading</h1>
+            <h2>heading</h2>
+            <h3>heading</h3>
+            <h4>heading</h4>
+            <h5>heading</h5>
+            
+            <input type="text" /><br />
+            <textarea>text area</textarea><br />
+            
+            <ul>
+                <li><a href="">Link</a></li>
+                <li>list</li>
+            </ul>
+        
+            Text text text text <strong>text</strong> text text
+            <br />
+            <a href="">Link</a>
+            <br />
+    		<br />
+         
+        <!-- two col layout -->
+            <div class="rightColTwoColLeft">
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+            </div>
+    
+            <div class="rightColTwoColRight">
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+            </div>
+    	
+        <div style="clear:both"></div>
+        
+        <!-- three col layout -->
+            <div class="rightColThreeColLeft">
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+            </div>
+    
+            <div class="rightColThreeColMid">
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+            </div>
+    
+            <div class="rightColThreeColRight">
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+                Text text text text <strong>text</strong> text text
+            </div>
+    
+            <input type="submit" />
+		</div>        
+		<div style="clear:both"></div>
+        
+    </div>
+	
+    
+    <div class="footer" align="left">
+        <!-- footer navigation" -->
+
+    	<ul>
+        	<li>footer header
+            <ul>
+        		<li><a href="">this is a link</a></li>
+        		<li><a href="">this is a link</a></li>
+        		<li><a href="">this is a link</a></li>
+        		<li><a href="">this is a link</a></li>
+			</ul></li>
+        	<li>footer header
+            <ul>
+        		<li><a href="">this is a link</a></li>
+        		<li><a href="">this is a link</a></li>
+        		<li><a href="">this is a link</a></li>
+        		<li><a href="">this is a link</a></li>
+			</ul></li>
+ 		</ul>        
+         
+       <p> &copy; Aurora Project | Questions? <a href="">contact us</a></p>
+    </div>
+
+</div>
+</body>
+</html>

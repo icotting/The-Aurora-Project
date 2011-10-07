@@ -1,0 +1,54 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: calibri;
+	font-size: 10pt;
+}
+
+#header {
+	background-image: url('../images/topbg.gif');
+	background-repeat: repeat-x;
+	height: 66px;
+	color: white;
+}
+
+#header h1 {
+	font-size: 18pt;
+	padding-left: 20px;
+	font-family: Geneva;
+	margin-top: 0px;
+	padding-top: 10px;
+	margin-left: 100px;
+}
+
+#header span {
+	position: relative;
+	top: -15px;
+	left: 120px;
+	font-size: 10pt;
+	font-family: Geneva;
+	margin-left: 100px;
+}
+
+#header img {
+	padding-left: 20px;
+	padding-top: 10px;
+	float: left;
+	width: 100px;
+	z-index: 100;
+	position: absolute;
+}
+
+#pageBody {
+	wdith: 100%;
+	position: relative;
+}
+
+#canvas {
+	width: 1024px;
+	margin: 0 auto;
+	border-left: 1px solid #eeeeee;
+	border-right: 1px solid #eeeeee;
+	border-bottom: 1px solid #eeeeee;
+	margin-bottom: 50px;
+}

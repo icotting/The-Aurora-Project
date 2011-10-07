@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="./resources/templates/app.xhtml">
+
+	<ui:define name="styles">
+		<link rel="stylesheet" type="text/css"
+			href="../resources/styles/dailydispatch.css" />
+			
+		<style>								
+			.railClass {
+				fill: none;
+  				stroke: #000;
+  				stroke-opacity: .75;
+  				stroke-width: 1px;
+  				shape-rendering: crispEdges;
+			}
+			
+			
+			#states path {
+				fill: none;
+  				stroke: #999;
+  				stroke-opacity: .40;
+  				shape-rendering: crispEdges;
+  				stroke-width: 1.25px;
+			}
+			
+			#counties path {
+				fill: none;
+  				stroke: #999;
+  				stroke-opacity: .40;
+  				shape-rendering: crispEdges;
+  				stroke-width: 0.75px;
+  			}
+  			
+  			#poptbl { width: 100%; }
+  			#poptbl td { padding-top: 5px; }
+  			#poptbl th {
+	 			text-align: left;
+			}
+			
+			td.legend { 
+				width: 20px;
+				height: 20px;
+				border: 1px solid black;
+			}
+			
+			td.slaveLabel {
+				padding-left: 10px;
+				font-size: 8pt;
+			}
+			
+			td.popLabelCounty {
+				padding-left: 10px;
+				display: none;	
+				font-size: 8pt;							
+			}
+			
+			td.popLabelState {
+				padding-left: 10px;
+				display: none;	
+				font-size: 8pt;							
+			}
+			
+			td.inSlaveryLabel {
+				padding-left: 10px;
+				display: none;
+				font-size: 8pt;				
+			}
+			
+		</style>
+			
+	</ui:define>
+
+	<ui:define name="scripts">
+		<script type="text/javascript" src="../resources/js/polymaps.min.js"></script>
+		<script type="text/javascript" src="../resources/js/common.js"></script>
+		<script type="text/javascript" src="../resources/js/population.js"></script>
+		<script type="text/javascript" src="../resources/js/highcharts/highcharts.js"></script>
+		<script type="text/javascript" src="../resources/js/highcharts/exporting.js"></script>		
+	</ui:define>
+
+	<ui:define name="appNav">
+		<a href="" class="selectednav">Slavery and the Growth of the Railroad</a><a href="">Scholarly Interpretation</a><a href="">Developer Resources</a><a href="">About the Data</a>
+	</ui:define>
+
+	<ui:define name="pageMap">
+			<div class="mapBorder" style="width: 1000px; height: 430px;" id="map"></div>
+			<div id="slider"></div>
+			<br/><span style="font-size: 8pt;" id="dateText">1840</span>			
+	</ui:define>
+	
+	<ui:define name="pageContent">
+			<f:view contentType="text/html">
+				<div id="populationPie" style="width: 700px; height: 400px;"></div>
+				<div id="populationTotals" style="width: 700px;">
+					<table id="poptbl" cellpadding="0" cellspacing="0">
+						
+					</table>
+				</div>
+				<div id="shiftChart" style="width: 700px; height: 400px; margin-top: 20px;"></div>				
+			</f:view>
+	</ui:define>
+
+	<ui:define name="ribbon">
+		<h4>Map Display:</h4>
+		<input onclick="paintBoundaries('slave');" checked="checked" type="radio" name="maptype"/>&nbsp;Number of Slaves<br/>
+		<input onclick="paintBoundaries('free');" type="radio" name="maptype"/>&nbsp;Number of Free Persons<br/>
+		<input onclick="paintBoundaries('population');" type="radio" name="maptype"/>&nbsp;Total Population<br/>
+		<input onclick="paintBoundaries('inSlavery');" type="radio" name="maptype"/>&nbsp;% of Population in Slavery
+		
+		<div style="margin-top: 20px;" id="slaveLegend">
+			<h4>Legend</h4>
+			<table>
+				<tr>
+					<td style="background-color: white;" class="legend">&nbsp;</td>
+					<td class="slaveLabel">No Slaves</td>
+					<td class="popLabelCounty">0 to 5,000 Persons</td>
+					<td class="popLabelState">0 to 50,000 Persons</td>
+					<td class="inSlaveryLabel">0 to 5 Percent</td>					
+				</tr>
+				<tr>
+					<td style="background-color: rgb(222,235,247);" class="legend">&nbsp;</td>
+					<td class="slaveLabel">1 to 1,000 Slaves</td>
+					<td class="popLabelCounty">5,000 to 10,000 Persons</td>
+					<td class="popLabelState">50,000 to 100,000 Persons</td>
+					<td class="inSlaveryLabel">5 to 10 Percent</td>					
+				</tr>
+				<tr>
+					<td style="background-color: rgb(198,219,239);" class="legend">&nbsp;</td>
+					<td class="slaveLabel">1,000 to 5,000 Slaves</td>
+					<td class="popLabelCounty">10,000 to 20,000 Persons</td>
+					<td class="popLabelState">100,000 to 200,000 Persons</td>
+					<td class="inSlaveryLabel">10 to 15 Percent</td>							
+				</tr>
+				<tr>
+					<td style="background-color: rgb(158,202,225);" class="legend">&nbsp;</td>
+					<td class="slaveLabel">5,000 to 10,000 Slaves</td>
+					<td class="popLabelCounty">20,000 to 30,000 Persons</td>
+					<td class="popLabelState">200,000 to 300,000 Persons</td>
+					<td class="inSlaveryLabel">15 to 20 Percent</td>							
+				</tr>
+				<tr>
+					<td style="background-color: rgb(107,174,214);" class="legend">&nbsp;</td>
+					<td class="slaveLabel">10,000 to 25,000 Slaves</td>
+					<td class="popLabelCounty">30,000 to 40,000 Persons</td>
+					<td class="popLabelState">300,000 to 400,000 Persons</td>
+					<td class="inSlaveryLabel">20 to 25 Percent</td>							
+				</tr>
+				<tr>
+					<td style="background-color: rgb(66,146,198);" class="legend">&nbsp;</td>
+					<td class="slaveLabel">25,000 to 50,000 Slaves</td>
+					<td class="popLabelCounty">40,000 to 50,000 Persons</td>
+					<td class="popLabelState">400,000 to 500,000 Persons</td>
+					<td class="inSlaveryLabel">25 to 30 Percent</td>						
+				</tr>
+				<tr>
+					<td style="background-color: rgb(33,113,181);" class="legend">&nbsp;</td>
+					<td class="slaveLabel">50,000 to 100,000 Slaves</td>
+					<td class="popLabelCounty">50,000 to 60,000 Persons</td>
+					<td class="popLabelState">500,000 to 600,000 Persons</td>
+					<td class="inSlaveryLabel">30 to 40 Percent</td>					
+				</tr>
+				<tr>
+					<td style="background-color: rgb(8,81,156);" class="legend">&nbsp;</td>
+					<td class="slaveLabel">100,000 to 250,000 Slaves</td>
+					<td class="popLabelCounty">60,000 to 70,000 Persons</td>
+					<td class="popLabelState">600,000 to 700,000 Persons</td>
+					<td class="inSlaveryLabel">40 to 50 Percent</td>							
+				</tr>
+				<tr>
+					<td style="background-color: rgb(8,48,107);" class="legend">&nbsp;</td>
+					<td class="slaveLabel">More than 250,000 Slaves</td>
+					<td class="popLabelCounty">More than 70,000 Persons</td>
+					<td class="popLabelState">More than 700,000 Persons</td>
+					<td class="inSlaveryLabel">Greater than 50 Percent</td>							
+				</tr>																																
+			</table>		
+		</div>
+	
+	</ui:define>
+
+</ui:composition>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="./resources/templates/app.xhtml">
+
+	<ui:define name="styles">
+		<link rel="stylesheet" type="text/css"
+			href="../resources/styles/dailydispatch.css" />
+	</ui:define>
+
+	<ui:define name="scripts">
+		<script type="text/javascript"
+			src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<script type="text/javascript" src="../resources/js/highcharts/highcharts.js"></script>
+		<script type="text/javascript" src="../resources/js/highcharts/exporting.js"></script>
+	
+
+		<script type="text/javascript" src="../resources/js/common.js"></script>
+		<script type="text/javascript" src="../resources/js/dailydispatch.js"></script>
+
+	</ui:define>
+
+	<ui:define name="pageMap">
+			<div class="mapBorder" style="width: 1000px; height: 430px;" id="map"></div>
+			<div id="slider"></div>
+			<br/><span style="font-size: 8pt;" id="dateText"></span>
+	</ui:define>
+	
+	<ui:define name="appNav">
+		<a href="" class="selectednav">The Civil War and Mobility</a><a href="">Scholarly Interpretation</a><a href="">Developer Resources</a><a href="">About the Data</a>
+	</ui:define>
+	
+	<ui:define name="pageContent">
+			<f:view contentType="text/html">
+			
+				<div id="chart"></div>	
+				<div id="text">
+					
+				</div>
+			</f:view>
+	</ui:define>
+
+	<ui:define name="ribbon">
+		<div id="datepicker"></div>	
+		Show places referenced days from the selected map date
+		<br/><br/><input size="5" type="text" id="daySpan" value="0"/><br/><br/>
+
+		Constrain map places by a keyword:<br/>
+		<br/><input type="text" id="constraint"/><br/><br/>
+
+		<input type="button" onclick="updateText()" value="Apply"/>		
+		<input style="color:#4a4a4a; background-color:#99b3cc;" type="button" onclick="clearConstraints()" value="Clear"/>
+	</ui:define>
+
+</ui:composition>
+
+</html>
