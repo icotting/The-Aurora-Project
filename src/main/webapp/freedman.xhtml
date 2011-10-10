@@ -8,7 +8,25 @@
 
 	<ui:define name="styles">
 		<link rel="stylesheet" type="text/css"
-			href="../resources/styles/dailydispatch.css" />			
+			href="../resources/styles/dailydispatch.css" />		
+			
+		<style>		
+			#states path {
+				fill: none;
+  				stroke: #000;
+  				stroke-opacity: .40;
+  				shape-rendering: crispEdges;
+  				stroke-width: 1.25px;
+			}
+			
+			#counties path {
+				fill: none;
+  				stroke: #000;
+  				stroke-opacity: .40;
+  				shape-rendering: crispEdges;
+  				stroke-width: 0.75px;
+			}
+		</style>	
 	</ui:define>
 
 	<ui:define name="scripts">
@@ -34,6 +52,8 @@
 
 	<ui:define name="pageMap">
 		<div class="mapBorder" style="width: 1000px; height: 430px; margin-bottom: 10px;" id="map"></div>
+				<span style="font-style: italic;">Contracts between
+		<span id="from"></span> and <span id="to"></span></span>
 		
 		<div class="timeline" align="center">
 			<div id="cursor">
@@ -55,7 +75,15 @@
 
 	<ui:define name="ribbon">
 		<div id="datepicker"></div>
-
+		<span>View contracts issued over:</span><br/>
+		<select id="dspan" onchange="updateDays()">
+			<option value="1">1 month</option>
+			<option value="3">3 months</option>
+			<option value="6">6 months</option>
+			<option value="12">12 months</option>
+			<option value="18">18 months</option>
+			<option selected="selected" value="24">24 months</option>
+		</select>
 	</ui:define>
 
 </ui:composition>

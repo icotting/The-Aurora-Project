@@ -270,14 +270,14 @@ function updateBoundaries(year) {
 	displayYear = round_year;
 	drawCharts(year);
 	
-	var tmp = po.geoJson().url("../rest/boundaries/counties/"+round_year+".json?B={B}&Z={Z}").id("counties").on("load", loadLabels).on("show", loadLabels);
+	var tmp = po.geoJson().url("../rest/boundaries/counties/"+round_year+".json?B={B}&Z={Z}&population=true").id("counties").on("load", loadLabels).on("show", loadLabels);
 	if ( counties ) { 
 		map.remove(counties);
 	}
 	map.add(tmp);
 	counties = tmp;
 	
-	tmp = po.geoJson().url("../rest/boundaries/states/"+round_year+".json?B={B}&Z={Z}").id("states").on("load", loadLabels).on("show", loadLabels);
+	tmp = po.geoJson().url("../rest/boundaries/states/"+round_year+".json?B={B}&Z={Z}&population=true").id("states").on("load", loadLabels).on("show", loadLabels);
 	if ( states ) {
 		map.remove(states);
 	}

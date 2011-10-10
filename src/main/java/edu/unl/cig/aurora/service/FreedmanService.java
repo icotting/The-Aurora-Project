@@ -5,7 +5,11 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -45,14 +49,116 @@ public class FreedmanService {
 	@GET
 	@Path("/hiringOffices.json")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getHiringOffices() {
+	public String getHiringOffices(@QueryParam("date") String date, @QueryParam("to") String toDate) throws ParseException {
 		
 		List<HiringOffice> offices = manager.createQuery("select h from HiringOffice as h").getResultList();
+		
+		Date from_date = FORMAT.parse(date);
+		Date to_date = (toDate == null) ? from_date : FORMAT.parse(
+				toDate);
+				
+		List<ContractContainer> containers = new ArrayList<ContractContainer>();
+		
+		for ( HiringOffice office : offices ) {
+			List<Long> contracts = manager
+					.createQuery(
+							"select c.id from Contract as c where c.contractDate between ?1 and ?2 and c.office = ?3")
+					.setParameter(1, from_date)
+					.setParameter(2, to_date).setParameter(3, office).getResultList();
+			
+			ContractContainer container = new ContractContainer();
+			container.setOffice(office);
+			container.setIssuedContracts(contracts.size());
+			
+			containers.add(container);
+		}
+		
+		Collections.sort(containers, new Comparator<ContractContainer>() {
 
+			@Override
+			public int compare(ContractContainer arg0, ContractContainer arg1) {
+				if ( arg0.getIssuedContracts() > arg1.getIssuedContracts() ) {
+					return -1;
+				} else if ( arg0.getIssuedContracts() < arg1.getIssuedContracts() ) {
+					return 1;
+				} else { 
+					return 0;
+				}
+			} 
+		});
+		
 		StringBuffer geo_json = new StringBuffer("{ \"type\": \"FeatureCollection\", \"features\": [");
 		
 		boolean first = true;
-		for ( HiringOffice office : offices ) { 
+		for ( ContractContainer container : containers ) { 
+		
+			if ( !first ) { 
+				geo_json.append(",");
+			} else {
+				first = false;
+			}
+			
+			geo_json.append(container);
+			
+		}
+		geo_json.append("]}");
+		return geo_json.toString();
+	}
+	
+	@GET
+	@Path("/destinations/{officeId}.json")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getDestinationsFor(@PathParam("officeId") long officeId, @QueryParam("date") String date, @QueryParam("to") String toDate) throws ParseException {
+		
+		Date from_date = FORMAT.parse(date);
+		Date to_date = (toDate == null) ? from_date : FORMAT.parse(
+				toDate);
+		
+		HiringOffice office = manager.find(HiringOffice.class, officeId);
+		
+		List<Contract> contracts = manager
+				.createQuery(
+						"select c from Contract as c where c.contractDate between ?1 and ?2 and c.office = ?3")
+				.setParameter(1, from_date)
+				.setParameter(2, to_date).setParameter(3, office).getResultList();
+		
+		HashMap<Long, DestinationContainer> destinations = new HashMap<Long, DestinationContainer>();
+		
+		for ( Contract c : contracts ) { 
+			
+			DestinationContainer container = destinations.get(c.getDestination().getId());
+			if ( container == null ) { 
+				container = new DestinationContainer();
+				container.setDestination(c.getDestination());
+				container.setSentContracts(1);
+				destinations.put(c.getDestination().getId(), container);
+			} else { 
+				container.setSentContracts(container.getSentContracts()+1);
+			}
+		}
+		
+		ArrayList<DestinationContainer> containers = new ArrayList<FreedmanService.DestinationContainer>(destinations.values());
+		Collections.sort(containers, new Comparator<DestinationContainer>() {
+
+			@Override
+			public int compare(DestinationContainer arg0,
+					DestinationContainer arg1) {
+				if ( arg0.getSentContracts() > arg1.getSentContracts() ) {
+					return -1;
+				} else if ( arg0.getSentContracts() < arg1.getSentContracts() ) {
+					return 1;
+				} else { 
+					return 0;
+				}
+			}
+			
+		});
+		
+		
+		StringBuffer geo_json = new StringBuffer("{ \"type\": \"FeatureCollection\", \"features\": [");
+		
+		boolean first = true;
+		for ( DestinationContainer dest : containers ) {
 			
 			if ( !first ) { 
 				geo_json.append(",");
@@ -60,16 +166,10 @@ public class FreedmanService {
 				first = false;
 			}
 			
-			geo_json.append("{\"type\" : \"Feature\",");
-			geo_json.append("\"geometry\": {\"type\": \"Point\", \"coordinates\": [");
-			geo_json.append(String.format("%f, %f", office.getLongitude(), office.getLatitude()));
-			geo_json.append("]}, \"properties\": {");
-			geo_json.append(String.format("\"placeName\":\"%s\"", office.getName()));
-			geo_json.append("}");
-			geo_json.append("}");
+			geo_json.append(dest);
 		}
-		geo_json.append("]}");
 		
+		geo_json.append("]}");
 		return geo_json.toString();
 	}
 	
@@ -365,4 +465,81 @@ public class FreedmanService {
 		}
 
 	}
+	
+	protected class ContractContainer {
+		private HiringOffice office;
+		private int issuedContracts;
+		
+		public HiringOffice getOffice() {
+			return office;
+		}
+		
+		public void setOffice(HiringOffice office) {
+			this.office = office;
+		}
+		
+		public int getIssuedContracts() {
+			return issuedContracts;
+		}
+		
+		public void setIssuedContracts(int issuedContracts) {
+			this.issuedContracts = issuedContracts;
+		}
+		
+		@Override
+		public String toString() {
+			StringBuffer geo_json = new StringBuffer();
+			
+			geo_json.append("{\"type\" : \"Feature\",");
+			geo_json.append("\"geometry\": {\"type\": \"Point\", \"coordinates\": [");
+			geo_json.append(String.format("%f, %f", office.getLongitude(), office.getLatitude()));
+			geo_json.append("]}, \"properties\": {");
+			geo_json.append(String.format("\"placeName\":\"%s\",", office.getName()));
+			geo_json.append(String.format("\"contractCount\":%d,", this.issuedContracts));
+			geo_json.append(String.format("\"placeId\":%d", this.office.getId()));
+			geo_json.append("}");
+			geo_json.append("}");
+			
+			return geo_json.toString();
+		}
+	};
+	
+	protected class DestinationContainer {
+		private ContractDestination destination;
+		private int sentContracts;
+				
+		public ContractDestination getDestination() {
+			return destination;
+		}
+
+		public void setDestination(ContractDestination destination) {
+			this.destination = destination;
+		}
+		
+		public int getSentContracts() {
+			return sentContracts;
+		}
+
+		public void setSentContracts(int sentContracts) {
+			this.sentContracts = sentContracts;
+		}
+
+		@Override
+		public String toString() {
+			StringBuffer geo_json = new StringBuffer();
+			
+			geo_json.append("{\"type\" : \"Feature\",");
+			geo_json.append("\"geometry\": {\"type\": \"Point\", \"coordinates\": [");
+			geo_json.append(String.format("%f, %f", this.getDestination().getLongitude(), this.getDestination().getLatitude()));
+			geo_json.append("]}, \"properties\": {");
+			geo_json.append(String.format("\"placeName\":\"%s %s %s\",", this.getDestination().getTownship(), this.getDestination().getCounty(), this.getDestination().getState()));
+			geo_json.append(String.format("\"contractCount\":%d,", this.getSentContracts()));
+			geo_json.append(String.format("\"placeId\":%d", this.getDestination().getId()));
+			geo_json.append("}");
+			geo_json.append("}");
+			
+			return geo_json.toString();
+		}
+	};
+	
 }

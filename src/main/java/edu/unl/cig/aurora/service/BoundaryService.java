@@ -282,13 +282,13 @@ public class BoundaryService {
 	@Path("/counties/{year}.json")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getCounties(@PathParam("year") int year,
-			@QueryParam("B") String bounds, @QueryParam("Z") float zoomLevel) {
+			@QueryParam("B") String bounds, @QueryParam("Z") float zoomLevel, @QueryParam("population") boolean population) {
 
 		if (zoomLevel >= 6) {
 			try {
-				return checkCache(year, bounds, (int) zoomLevel, "county");
+				return checkCache(year, bounds, (int) zoomLevel, "county", population);
 			} catch (CacheMissException ce) {
-				return queryFeature(year, bounds, zoomLevel, true);
+				return queryFeature(year, bounds, zoomLevel, true, population);
 			}
 		} else {
 			return "{ \"type\": \"FeatureCollection\",\"features\": []}";
@@ -300,21 +300,22 @@ public class BoundaryService {
 	@Path("/states/{year}.json")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getStates(@PathParam("year") int year,
-			@QueryParam("B") String bounds, @QueryParam("Z") float zoomLevel) {
+			@QueryParam("B") String bounds, @QueryParam("Z") float zoomLevel, @QueryParam("population") boolean population) {
 
 		try {
-			return checkCache(year, bounds, (int) zoomLevel, "state");
+			return checkCache(year, bounds, (int) zoomLevel, "state", population);
 		} catch (CacheMissException ce) {
-			return queryFeature(year, bounds, zoomLevel, false);
+			return queryFeature(year, bounds, zoomLevel, false, population);
 		}
 	}
 
-	private String checkCache(int year, String bounds, int zoom, String type)
+	private String checkCache(int year, String bounds, int zoom, String type, boolean includePop)
 			throws CacheMissException {
 
 		try {
 			File cache_file = new File(System.getProperty("java.io.tmpdir")
 					+ File.separator + "edu.unl.cig.aurora.TileCache"
+					+ File.separator + ((includePop == true) ? "population" : "no_population")
 					+ File.separator + type + File.separator + (int) zoom
 					+ File.separator + bounds + File.separator + year + ".json");
 			
@@ -338,7 +339,7 @@ public class BoundaryService {
 	}
 
 	private String queryFeature(final int year, final String bounds,
-			final float zoomLevel, final boolean county) {
+			final float zoomLevel, final boolean county, final boolean includePop) {
 
 		final StringBuffer sb = new StringBuffer(
 				"{ \"type\": \"FeatureCollection\",\"features\": [");
@@ -414,10 +415,11 @@ public class BoundaryService {
 				sb.append("\"boundaryType\":\""
 						+ (county ? "US County" : "US State") + "\"");
 
-				addPopulationProperties(county ? features.getString(3)
-						: features.getString(2), county ? features.getString(2)
-						: null, year, sb, conn);
-
+				if ( includePop ) {
+					addPopulationProperties(county ? features.getString(3)
+							: features.getString(2), county ? features.getString(2)
+							: null, year, sb, conn);
+				}
 				sb.append("}}");
 				boundaries.close();
 			}
@@ -433,6 +435,7 @@ public class BoundaryService {
 								.getProperty("java.io.tmpdir")
 								+ File.separator
 								+ "edu.unl.cig.aurora.TileCache"
+													+ File.separator + ((includePop == true) ? "population" : "no_population")
 								+ File.separator
 								+ (county ? "county" : "state")
 								+ File.separator
