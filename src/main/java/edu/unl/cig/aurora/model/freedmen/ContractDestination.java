@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -76,6 +77,22 @@ public class ContractDestination {
 	
 	public void setLongitude(float longitude) {
 		this.longitude = longitude;
+	}
+	
+	@XmlElement(name="fullPlaceName")
+	public String getFullPlaceName() { 
+		
+		StringBuffer sb = new StringBuffer();
+		if ( this.township != null && !this.township.trim().equals("") ) { 
+			sb.append(this.township+", ");
+		}
+		if ( this.county != null && !this.county.trim().equals("") ) { 
+			sb.append(this.county+", ");
+		}
+		sb.append(this.state);
+		
+		return sb.toString();
+		
 	}
 	
 	@OneToMany(mappedBy="destination", fetch=FetchType.LAZY)

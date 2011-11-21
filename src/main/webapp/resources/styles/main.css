@@ -244,3 +244,10 @@ border:4px solid #ffffff;
 #datepicker {
 	margin-top: 50px;
 }
+
+#plist {
+	list-style:  none;
+}
+
+#plist li { margin-bottom: 10px; }
+

@@ -68,8 +68,20 @@
 	<ui:define name="pageContent">
 		<f:view contentType="text/html">
 
-			<div id="chart"></div>
+		<div style="margin-top: 50px;">
+			<div id="workerChart" style="width: 700px; height: 650px; clear: both;"></div>
 
+			<h1>Contracts from <span id="selected_place"></span></h1>
+			<div id="contract_list" style="width: 400px; position: relative; float: left">
+			
+			</div>
+			<div style="width: 250px; position: relative; float: right">
+				<h4>Destinations</h4>
+				<div id="place_list">
+				
+				</div>
+			</div>
+		</div>
 		</f:view>
 	</ui:define>
 

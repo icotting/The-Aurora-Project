@@ -484,40 +484,40 @@ public class BoundaryService {
 
 		Line l = new Line(coordString, true);
 		float tol;
-
+		
 		switch (zoomLevel) {
 		case 0:
-			tol = 400f;
+			tol = 300f;
 			break;
 		case 1:
 			tol = 200f;
 			break;
 		case 2:
-			tol = 100f;
+			tol = 150f;
 			break;
 		case 3:
-			tol = 50f;
+			tol = 100f;
 			break;
 		case 4:
-			tol = 25f;
+			tol = 75f;
 			break;
 		case 5:
-			tol = 12.5f;
+			tol = 50f;
 			break;
 		case 6:
-			tol = 6.25f;
+			tol = 25f;
 			break;
 		case 7:
-			tol = 3.125f;
+			tol = 12.5f;
 			break;
 		case 8:
-			tol = 1.56f;
+			tol = 6.25f;
 			break;
 		case 9:
-			tol = 0.753f;
+			tol = 3.125f;
 			break;
 		case 10:
-			tol = 0.375f;
+			tol = 1.75f;
 			break;
 		default:
 			tol = 0f;

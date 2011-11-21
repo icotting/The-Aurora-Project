@@ -217,6 +217,18 @@ public class FreedmanService {
 				.setParameter(2, from_date)
 				.setParameter(3, to_date).getResultList();
 
+		Collections.sort(contracts, new Comparator<Contract>() {
+
+			@Override
+			public int compare(Contract arg0, Contract arg1) {
+			
+				if ( arg0.getDestination().getState().equals(arg1.getDestination().getState())) {
+					return arg0.getDestination().getFullPlaceName().compareTo(arg1.getDestination().getFullPlaceName());
+				} else { return arg0.getDestination().getState().compareTo(arg1.getDestination().getState()); }
+			} 
+		});
+		
+		
 		return contracts;
 	}
 
