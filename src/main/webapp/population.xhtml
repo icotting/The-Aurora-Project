@@ -88,14 +88,24 @@
 	</ui:define>
 
 	<ui:define name="pageMap">
-			<div class="mapBorder" style="width: 1000px; height: 430px;" id="map"></div>
-			<div id="slider"></div>
-			<br/><span style="font-size: 8pt;" id="dateText">1840</span>			
+			<div class="mapBorder" style="width: 1000px; height: 430px; margin-bottom: 10px;" id="map"></div>
+			
+		<div class="timeline" align="center">
+			<div id="cursor">
+				<img src="resources/images/cursor.png" alt="cursor" />
+			</div>
+			<img src="resources/images/timeline.png" alt="timeline" />
+			<div id="number"></div>
+		<span style="font-size: 8pt;" id="dateText">1840</span>		
+		</div>
+			
+	<!-- <div id="slider"></div>
+			<br/><span style="font-size: 8pt;" id="dateText">1840</span> -->			
 	</ui:define>
 	
 	<ui:define name="pageContent">
 			<f:view contentType="text/html">
-				<div id="populationPie" style="width: 700px; height: 400px;"></div>
+				<div id="populationPie" style="width: 700px; height: 400px; margin-top: 50px;"></div>
 				<div id="populationTotals" style="width: 700px;">
 					<table id="poptbl" cellpadding="0" cellspacing="0">
 						

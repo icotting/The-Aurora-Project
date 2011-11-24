@@ -10,10 +10,69 @@ var railYear = 1840;
 var distributionChart;
 var shiftChart;
 
+var yearsBetween = 1870 - 1840;
+
+var pathWidth = 367;
+var initialPositionOnPath;
+
 var features = new Array();
+var selected_year = 1840;
 
 $(document).ready(function() {
-	displayYear = 1845;
+	displayYear = 1840;
+	
+	var pathMin = 0;
+	var pathMax = yearsBetween;
+	var range = pathMax - pathMin;
+
+	var initialPosition = 0;
+
+	// set up initial position
+	initialPositionOnPath = (((initialPosition - pathMin) / range) * (pathWidth * 2))
+			- pathWidth;
+
+	$('#number').css('left', initialPositionOnPath);
+	$('#cursor').css('left', initialPositionOnPath);
+	// $('#number').html(initialPosition);
+
+	// draggable cursor
+	$('#cursor')
+			.draggable(
+					{
+						containment : "parent",
+						axis : "x",
+						grid : [ 7, 0 ],
+						drag : function() {
+							var percentOnPath = (parseFloat($(
+									'#cursor').css('left')) + pathWidth)
+									/ (pathWidth * 2);
+
+							$('#number').css('left',
+									$('#cursor').css('left'));
+							// $('#number').html(new_date.toDateString());
+							
+							$("#dateText").html('');
+							$("#dateText").html(parseInt(1840+(yearsBetween*percentOnPath)));
+						},
+						stop : function() {
+							var percentOnPath = (parseFloat($(
+									'#cursor').css('left')) + pathWidth)
+									/ (pathWidth * 2);
+							
+							var year = parseInt(1840+(yearsBetween*percentOnPath));
+							year = (year % 5) >= 2.5 ? parseInt(year / 5) * 5 + 5 : parseInt(year / 5) * 5;
+							
+							if ( year != selected_year ) {
+								selected_year = year;
+								if ( year == 1870 ) {
+									updateBoundaries(1860);
+								}
+								updateBoundaries(year);
+								updateNetwork(year);			
+							}
+						}
+					});
+	
 	
 	  distributionChart = new Highcharts.Chart({
 	      chart: {
@@ -70,23 +129,7 @@ $(document).ready(function() {
 });
 
 $(function() {
-	$( "#slider" ).slider({
-		range: false,
-		step: 5,
-		min: 1840,
-		max: 1865,
-		value: 1840,
-		stop: function( event, ui ) {
-			
-		}, 
-		slide: function( event, ui ) { 
-			$("#dateText").html('');
-			$("#dateText").html(ui.value);
-			updateBoundaries(ui.value);
-			updateNetwork(ui.value);
 
-		}
-	});
 });
 
 function drawCharts(railYear) {

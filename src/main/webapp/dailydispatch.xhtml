@@ -44,6 +44,7 @@
 	</ui:define>
 
 	<ui:define name="ribbon">
+		<div style="position: relative; top: -30px;">
 		<div id="datepicker"></div>	
 		Show places referenced days from the selected map date
 		<br/><br/><input size="5" type="text" id="daySpan" value="0"/><br/><br/>
@@ -53,6 +54,7 @@
 
 		<input type="button" onclick="updateText()" value="Apply"/>		
 		<input style="color:#4a4a4a; background-color:#99b3cc;" type="button" onclick="clearConstraints()" value="Clear"/>
+		</div>
 	</ui:define>
 
 </ui:composition>
