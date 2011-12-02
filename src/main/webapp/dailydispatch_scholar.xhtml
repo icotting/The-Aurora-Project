@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="./resources/templates/text.xhtml">
+
+        <ui:define name="appNav">
+            <a href="./dailydispatch.xhtml">Slavery and the Growth of the Railroad</a><a href="" class="selectednav">Scholarly Interpretation</a><a href="">Developer Resources</a><a href="">About the Data</a>
+        </ui:define>
+
+
+        <ui:define name="pageContent">
+        		<div id="textSection">
+                <h1>The Civil War and Mobility</h1>
+                <p>The Civil War produced wide dislocation and human mobility, yet we have few means to track migration during the war. Refugees, prisoners, former slaves (contrabands), and soldiers constituted the largest groups of people on the move. Railroads provided the essential framework for these movements, although road structures and turnpikes also played a role. Evidence abounds in letters, diaries, and memoirs about the vast geographic spaces that many Americans crossed in these years. Some movement was peculiar to the South, but much of it was experienced by northerners as well. Northern soldiers often traveled hundreds of miles by steam to get to the front in the first year of the war. Prisoners of war were shipped by rail. And some northerners on the border also experienced refugeeing as Confederate forces raided parts of Ohio, Indiana, Missouri, and Pennsylvania.</p>
+                <p>There have been almost no maps produced to document or visualize this movement. This App seeks to display place references drawn from newspaper texts and to plot the geography of the war's unfolding using one of the highest quality digital resources available, The Richmond Daily Dispatch. The Richmond Daily Dispatch, like many newspapers during the Civil War, carried short notations of movements--prisoners were brought down the line from point A to point B yesterday, for example, or the soldiers of the 54th Virginia were seen moving toward Gordonsville from the depot at Bristoe Station. Refugees received prominent mention. And contrabands appeared in the Confederate newspapers as well. The visualization tool allows a user to look for all movements of a given type in a given year, month, or day and to see these plotted on the framework map. Other data, especially railroad node and depot data, would allow a detailed and accurate graphing and modeling of human movements in the war.</p>
+                <p>In four years of the newspaper over 8,300 unique place names occurred over 292,000 times. Over 370 individual railroads appeared in the four years of the Richmond newspaper, but each appears multiple times. Newspapers routinely shortened the names of individual roads. We have standardized these names to match our GIS of the 1861 railroad network, but some inconsistencies remain. Proper authority files for railroad names remains an area of research for this project.</p>
+                <p>The intense and accurate geocoding of the newspaper text allows us to create visualizations of keywords. Because we the xml encodes each sentence, we can determine where any place is used in a sentence with a given word. Contraband, slave, fugitive, deserter, and guerrilla, therefore, can be queried for the place names associated. We can represent the 781 instances of "contraband" of which 421 occurrences include a place name, including 157 unique place names. The word "slave" occurs with 570 unique place names. The App maps the geographic occurrences of any word, organization, or term.</p>
+                <p>The App allows a user to search for all place references for a given keyword in a given year, month, or day and to see these plotted on the framework map. In addition, it allows the viewer to scroll through time to "see" how the geographic references in the war changed over time and across space. Other data, especially railroad node and depot data, will be added to allow a detailed and accurate modeling of place-to-place movement in the war.</p>
+                             
+                <h4>Selected References</h4>
+                <p>Anderson, Benedict. (1991). Imagined Communities: Reflections on the Origin and Spread of Nationalism. rev. ed. London: Verso.</p>
+                <p>Ash, Stephen. (1995). When the Yankees Came: Conflict and Chaos in the Occupied South, 1861-1865. Chapel Hill: University of North Carolina Press.</p>
+                <p>Ayers, Edward L. (2003). In the Presence of Mine Enemies: War in the Heart of America, 1859-1863. New York: W. W. Norton.</p>
+                <p>Crane, Gregory and Alison Jones. The Challenge of Virginia Banks: An Evaluation of Named Entity Analysis in a 19th-Century Newspaper Collection. In Proceedings of the 6th ACM/IEEE-CS joint conference on Digital libraries, pages 31-40, Chapel Hill, North Carolina , 2006. </p>
+                <p>Knowles, Anne Kelly. "Labor, Race, and Technology in the Confederate Iron Industry," Technology and Culture Vol. 42 No. 1 (January 2001): 1-26.</p>
+                <p>Nelson, Robert K. (2011). "Of Monsters, Men--and Topic Modeling," New York Times. (http://opinionator.blogs.nytimes.com/2011/05/29/of-monsters-men-and-topic-modeling/)</p>
+                <p>Paskoff, Paul F. "Measures of War: A Quantitative Examination of the Civil War's Destructiveness in the Confederacy," Civil War History Vol. 54 No. 1 (March 2008).</p>
+                <p>Sternhell, Yael. (2008). "Revolution in Motion: Human Mobility and the Transformation of the South, 1861-1865," Ph.D. Dissertation, Yale University.</p>
+                </div>
+        </ui:define>
+
+        <ui:define name="ribbon">
+
+        </ui:define>
+
+    </ui:composition>
+
+</html>

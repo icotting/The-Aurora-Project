@@ -18,7 +18,7 @@ public class Coordinate {
 	private final double longitude;
 
 	private boolean marked;
-	
+        
 	public static Coordinate coordFromKmlPoint(String coord) {
 		String[] coords = coord.split(",");
 		return new Coordinate(Float.parseFloat(coords[0]), Float.parseFloat(coords[1]));

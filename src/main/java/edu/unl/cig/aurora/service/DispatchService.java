@@ -87,6 +87,14 @@ public class DispatchService {
 		}
 	}
 
+	
+	@GET
+	@Produces("application/json")
+	@Path("places/geo/dates/{date}.json")
+	public String getPlaceGeoForDate(@PathParam("date") String date, @QueryParam("to") String toDate, @QueryParam("constraint") String constraint ) {	
+		return this.getPlacesForDate(date, toDate, false, constraint).toGeoJsonString();
+	}
+	
 	@GET
 	@Produces("application/json")
 	@Path("/places/dates/{date}.json")

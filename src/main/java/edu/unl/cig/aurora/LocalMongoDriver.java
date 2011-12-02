@@ -13,7 +13,7 @@ import com.mongodb.Mongo;
  * NOTE: this class should only be used when the Mongo instance is running locally.  
  *
  */
-public class LocalMongoDriver {
+public @Deprecated class LocalMongoDriver {
 
 	public static final String DATABASE_NAME = "DispatchXML";
 	public static final String COUNT_COLLECTION = "placeCounts";

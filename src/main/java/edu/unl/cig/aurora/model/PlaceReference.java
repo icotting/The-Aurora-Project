@@ -182,4 +182,17 @@ public class PlaceReference implements Comparable<PlaceReference> {
 
 		return ref;
 	}
+	
+	public String toGeoJsonString() { 
+		StringBuffer json = new StringBuffer("{\"type\" : \"Feature\",");
+		json.append("\"geometry\": {\"type\": \"Point\", \"coordinates\": [");
+		json.append(String.format("%f, %f", longitude,latitude));
+		json.append("]}, \"properties\": {");
+		json.append(String.format("\"placeName\":\"%s\",", this.placeName));
+		json.append(String.format("\"referenceCount\":%d,", this.referenceCount));
+		json.append(String.format("\"placeKey\":\"%s\"", this.placeKey));
+		json.append("}");
+		json.append("}");
+		return json.toString();
+	}
 }

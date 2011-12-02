@@ -251,3 +251,15 @@ border:4px solid #ffffff;
 
 #plist li { margin-bottom: 10px; }
 
+#textSection { 
+	position: relative; 
+	top: -20px;
+	text-align: justify;
+}
+
+#textSection h4 { 
+	margin-top: 50px;
+}
+
+#textSection ul { list-style: none; }
+#textSection ul li { margin-bottom: 10px; }

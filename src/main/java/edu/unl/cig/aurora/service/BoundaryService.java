@@ -1,6 +1,9 @@
 /* Created on Aug 1, 2011 */
 package edu.unl.cig.aurora.service;
 
+import edu.unl.cig.aurora.model.gis.BoundingBox;
+import edu.unl.cig.aurora.model.gis.Coordinate;
+import edu.unl.cig.aurora.model.gis.Line;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -23,9 +26,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import edu.unl.cig.aurora.model.gis.BoundingBox;
-import edu.unl.cig.aurora.model.gis.Coordinate;
-import edu.unl.cig.aurora.model.gis.Line;
+
 
 /**
  * @author Ian Cottingham
@@ -40,7 +41,7 @@ public class BoundaryService {
 
 	@Resource(name = "jdbc/aurora")
 	private DataSource source;
-
+        
 	@GET
 	@Path("/{B}/railPopulationShift.json")
 	@Produces(MediaType.APPLICATION_JSON)
