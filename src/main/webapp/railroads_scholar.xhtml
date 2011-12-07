@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="./resources/templates/text.xhtml">
+
+        <ui:define name="appNav">
+            <a href="./railroads.xhtml">Railroad Network Connectivity</a><a href="" class="selectednav">Scholarly Interpretation</a><a href="">Developer Resources</a><a href="">About the Data</a>
+        </ui:define>
+
+
+        <ui:define name="pageContent">
+        		<div id="textSection">
+                                             <h1>Railroad Network Connectivity</h1>
+                            <p>The organizational and economic superstructure of the railroad industry, as well as the network connectivity, developed unevenly over time and across space, and we seek here to understand the changing patterns of commodity flows and passenger traffic between settlements, towns and cities and their role within the wider context of overall regional economic development.  Without actual track connections on the ground it was impossible for efficient freight transfer between railroads to take place, yet at the same time, the existence of such connections did not guarantee freight interchange if the railroads involved were not operating on 'friendly' co-operative terms. And as a cautionary footnote, when considering small scale digital maps of large areas of the USA, the fact that specific towns were served by multiple railroads should not be taken to imply that there were necessarily track connections between these railroads, especially in the antebellum era.</p>
+                            <p>The App aims to introduce some key aspects of 19th century network development at both the national and the regional scale, using a range of newly developed GIS datasets and substantially enhanced versions of earlier digital data resources (Healey and Stamp 2000).  Details of how these datasets were constructed and potential sources of error can be found by clicking on the highlighted terms. The national scale datasets cover the early period from 1840 to 1870 in five-year intervals.  The chosen year can be controlled using the slider bar underneath the map display on the App web page.  These individual time slices show the extent of completed railroad trackage (but see error sources above) and allow the names of specific railroads to be identified.  In this early period, it was common for longer stretches of line to be composed of a number of shorter lines, each owned by a separate company chartered to provide service between two larger settlements perhaps 50-10 miles apart.  As time progressed, many of these shorter lines were absorbed into larger systems, so numerous changes of name associated with specific lines are to be expected in working with many parts of the data (Taylor and Neu 1956, Chandler 1977). The expanding and partially overlapping territories can be observed in the App by moving the slider bar between the five year time interval positions up to 1900.</p>
+
+                            <h4>Selected References</h4>
+                            <p>Chandler, A.D. (1977). The visible hand: the managerial revolution in American business.  Cambridge, Massachusetts:  Harvard University Press.</p>
+                            <p>Dilts, J.D. (1993). The Great Road: the building of the Baltimore and Ohio, the nation's first railroad, 1828-1853.   Stanford:  Stanford University Press.</p>
+                            <p>Edson, W.D.  (1993) Railroad names : a directory of common carrier railroads operating in the United States, 1826-1992.  Potomac, Md. : McClain.</p>
+                            <p>Healey, R.G. and Stamp, T. (2000) Historical GIS as a Foundation for the Analysis of Regional Economic Growth : Theoretical, Methodological and Practical Issues.  Social Science History, 24, 3, 575-612.</p>
+                            <p>John, Richard R. (1995) Spreading the News: The American Postal System from Franklin to Morse. Cambridge: Harvard University Press.</p>
+                            <p>MacAvoy, P.W. (1965). The economic effects of regulation:  the trunk-line railroad cartels and the Interstate Commerce Commission before 1900.    Cambridge, Massachusetts: MIT Press.</p>
+                            <p>Schivelbusch, Wolfgang. (1987) The Railway Journey: Industrialization and Perception of Time and Space. University of California Press.</p>
+                            <p>Schotter, H.W. (1927). The growth and development of the Pennsylvania Railroad Company. Philadelphia: Allen, Lane and Scott.</p>
+                            <p>Stover, J.F. (1999). The Routledge historical atlas of the American railroads.  New York: Routledge.</p>
+                            <p>Taylor, G.R. and Neu, I.D. (1956). The American railroad network 1861-1890.  Cambridge, Massachusetts: Harvard University Press.</p>
+
+                        </div>
+        </ui:define>
+
+        <ui:define name="ribbon">
+			<h3>Related Case Study</h3>
+			<div>
+                            <h5><a href="http://railroads.unl.edu/views/item/borr">Richard G. Healey, "Network Connectivity--A Close Analysis of the Baltimore and Ohio Railroad's Expansion</a></h5>
+                            The opening up of the North American continent by the railroads is arguably one of the greatest achievements of the 19th century industrial revolution.  While the majority of railroad network expansion took place in the U.S.A, important developments were also made in Canada and Mexico.  By 1850, a generation after the technological feasibility of steam locomotion had been demonstrated on the Stockton and Darlington Railway in England, approximately 9,000 miles of railroad track had been laid in the U.S.A. 
+                        </div>
+        </ui:define>
+
+    </ui:composition>
+
+</html>

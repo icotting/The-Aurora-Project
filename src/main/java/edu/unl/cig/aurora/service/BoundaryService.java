@@ -35,10 +35,10 @@ import javax.ws.rs.core.MediaType;
 @Path("/boundaries")
 @ManagedBean
 public class BoundaryService {
-
+        
 	private static final Logger LOG = Logger.getLogger(BoundaryService.class
 			.getName());
-
+        
 	@Resource(name = "jdbc/aurora")
 	private DataSource source;
         
@@ -197,7 +197,7 @@ public class BoundaryService {
 				}
 			}
 			
-			StringBuffer sb = new StringBuffer("{\"totals\": {");
+			StringBuilder sb = new StringBuilder("{\"totals\": {");
 			sb.append("\"free\":");
 			sb.append(free_total);
 			sb.append(",\"slave\":");
