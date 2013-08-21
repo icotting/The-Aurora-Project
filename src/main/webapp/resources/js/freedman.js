@@ -96,14 +96,12 @@ $(document)
 															[ "a.", "b.", "c.",
 																	"" ])));
 
-					
 					// map.add(po.geoJson().url("../rest/boundaries/states/1860.json?B={B}&Z={Z}").id("states").on("load",
 					 //function(){
 					 
 					 
 					  //}) );
 					 
-
 					updateLayer(baseStartDate);
 				});
 
@@ -131,6 +129,39 @@ function updateLayer(date) {
 	map.add(currentLayer);
 }
 
+var unlNetwork;
+function updateRail() {
+    var tmp;
+    if ( $("#rn").val() != "none" ) {
+        tmp = po.geoJson().url("../rest/railroad/network/1?year="+$("#rn").val()).tile(false).on("load", loadNetwork).id("unlRail");
+    }
+    
+    if ( unlNetwork ) {
+        map.remove(unlNetwork);
+    }
+    
+    map.add(tmp);
+    unlNetwork = tmp;
+}
+
+function loadNetwork(e) {
+    for ( var i = 0; i < e.features.length; i++) {
+        var f = e.features[i], c = f.element;
+        var name = e.features[i].data.properties.name;
+        c.setAttribute("fille", "none");
+        c.setAttribute("shape-rendering", "crispEdges")
+        c.setAttribute("stroke-opacity", "0.75");
+        c.setAttribute("stroke-width", 2);
+        c.setAttribute("stroke", "#000000");
+
+        if ( !visibleLines[name]) {
+            visibleLines[name] = new Array();
+        }
+        visibleLines[name].push(c);
+    }
+}
+
+
 var selectedNode;
 
 function selectPlace(p) {
@@ -139,7 +170,7 @@ function selectPlace(p) {
 	}
 
 	if (selectedNode)
-		selectedNode.setAttribute("fill", "#ffffff");
+            selectedNode.setAttribute("fill", "#ffffff");
 
 	selectedNode = p;
 	selectedNode.setAttribute("fill", "#708496");
@@ -231,7 +262,7 @@ function selectPlace(p) {
 			
 			html += "<tr>";
 			html += "<td>Worker Gender:</td><td style=\"width: 75px;\">"+contract.worker.gender+"</td><td>Work Class:</td><td style=\"width: 150px;\">"+contract.workClass+"</td></tr>";
-			html += "<tr><td>Rate of pay:</td><td style=\"width: 75px;\">"+contract.rateOfPay+"</td><td>Renumeration:</td><td style=\"width: 150px;\">"+contract.renumeration+"</td></tr>";
+			html += "<tr><td>Rate of pay:</td><td style=\"width: 75px;\">"+contract.rateOfPay+"</td><td>Remuneration:</td><td style=\"width: 150px;\">"+contract.renumeration+"</td></tr>";
 			
 			if (contract.comments) {
 				html += "<tr><td>Comments:</td>";
@@ -385,8 +416,14 @@ function plotDestinations(e) {
 	}
 }
 
-function plotOffices(e) {
+var targetMap = new Object();
 
+function selectFromLink(place) {
+    selectPlace(targetMap[place]);
+}
+
+function plotOffices(e) {
+        $("#hiringOffices").html("");
 	for ( var i = 0; i < e.features.length; i++) {
 		var f = e.features[i], c = f.element;
 		g = f.element = po.svg("image");
@@ -403,7 +440,9 @@ function plotOffices(e) {
 
 		nodes[i] = e.features[i].data.properties;
 		c.id = i;
-
+                
+                targetMap[e.features[i].data.properties.placeName] = c;
+                $("#hiringOffices").append("<a href=\"javascript:selectFromLink('"+e.features[i].data.properties.placeName+"')\">"+e.features[i].data.properties.placeName+"</a><br/>");
 		if (!selectedNode)
 			selectPlace(c);
 

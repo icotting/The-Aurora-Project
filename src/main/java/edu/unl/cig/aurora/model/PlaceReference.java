@@ -7,8 +7,6 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import org.joda.time.DateTime;
 
-import com.mongodb.DBObject;
-
 //TODO: make this immutable 
 @XmlRootElement(name = "placeReference")
 public class PlaceReference implements Comparable<PlaceReference> {

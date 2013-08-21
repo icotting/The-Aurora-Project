@@ -1,103 +1,123 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 
-<ui:composition template="./resources/templates/app.xhtml">
+    <ui:composition template="./resources/templates/app.xhtml">
 
-	<ui:define name="styles">
-		<link rel="stylesheet" type="text/css"
-			href="../resources/styles/dailydispatch.css" />		
-			
-		<style>		
-			#states path {
-				fill: none;
-  				stroke: #000;
-  				stroke-opacity: .40;
-  				shape-rendering: crispEdges;
-  				stroke-width: 1.25px;
-			}
-			
-			#counties path {
-				fill: none;
-  				stroke: #000;
-  				stroke-opacity: .40;
-  				shape-rendering: crispEdges;
-  				stroke-width: 0.75px;
-			}
-		</style>	
-	</ui:define>
+        <ui:define name="styles">
+            <link rel="stylesheet" type="text/css"
+                  href="../resources/styles/dailydispatch.css" />		
 
-	<ui:define name="scripts">
-		<script type="text/javascript" src="../resources/js/polymaps.min.js"></script>
-		<script type="text/javascript"
-			src="../resources/js/highcharts/highcharts.js"></script>
-		<script type="text/javascript"
-			src="../resources/js/highcharts/exporting.js"></script>
+            <style>		
+                #states path {
+                    fill: none;
+                    stroke: #000;
+                    stroke-opacity: .40;
+                    shape-rendering: crispEdges;
+                    stroke-width: 1.25px;
+                }
+
+                #counties path {
+                    fill: none;
+                    stroke: #000;
+                    stroke-opacity: .40;
+                    shape-rendering: crispEdges;
+                    stroke-width: 0.75px;
+                }
+
+                #unlRail path {
+                    fill: none;
+                    stroke: #000;
+                    stroke-width: 1px;
+                }
 
 
-		<script type="text/javascript" src="../resources/js/common.js"></script>
-		<script type="text/javascript" src="../resources/js/freedman.js"></script>
+            </style>	
+        </ui:define>
 
-	</ui:define>
+        <ui:define name="scripts">
+            <script type="text/javascript" src="../resources/js/polymaps.min.js"></script>
+            <script type="text/javascript"
+            src="../resources/js/highcharts/highcharts.js"></script>
+            <script type="text/javascript"
+            src="../resources/js/highcharts/exporting.js"></script>
 
-	<ui:define name="appNav">
-		<a href="" class="selectednav">African American Mobility After
-			Emancipation</a>
-		<a href="./freedman_scholar.xhtml">Scholarly Interpretation</a>
-		<a href="">Developer Resources</a>
-		<a href="">About the Data</a>
-	</ui:define>
 
-	<ui:define name="pageMap">
-		<div class="mapBorder" style="width: 1000px; height: 430px; margin-bottom: 10px;" id="map"></div>
-				<span style="font-style: italic;">Contracts between
-		<span id="from"></span> and <span id="to"></span></span>
-		
-		<div class="timeline" align="center">
-			<div id="cursor">
-				<img src="resources/images/cursor.png" alt="cursor" />
-			</div>
-			<img src="resources/images/timeline.png" alt="timeline" />
-			<div id="number"></div>
-		<span style="font-size: 8pt;" id="dateText"></span>		
-		</div>
-	</ui:define>
+            <script type="text/javascript" src="../resources/js/common.js"></script>
+            <script type="text/javascript" src="../resources/js/freedman.js"></script>
 
-	<ui:define name="pageContent">
-		<f:view contentType="text/html">
+        </ui:define>
 
-		<div style="margin-top: 50px;">
-			<div id="workerChart" style="width: 700px; height: 650px; clear: both;"></div>
+        <ui:define name="appNav">
+            <a href="" class="selectednav">African American Mobility After
+                Emancipation</a>
+            <a href="./freedman_scholar.xhtml">Scholarly Interpretation</a>
+            <a href="">Developer Resources</a>
+            <a href="">About the Data</a>
+        </ui:define>
 
-			<h1>Contracts from <span id="selected_place"></span></h1>
-			<div id="contract_list" style="width: 400px; position: relative; float: left">
-			
-			</div>
-			<div style="width: 250px; position: relative; float: right">
-				<h4>Destinations</h4>
-				<div id="place_list">
-				
-				</div>
-			</div>
-		</div>
-		</f:view>
-	</ui:define>
+        <ui:define name="pageMap">
+            <div class="mapBorder" style="width: 1000px; height: 430px; margin-bottom: 10px;" id="map"></div>
+            <span style="font-style: italic;">Contracts between
+                <span id="from"></span> and <span id="to"></span></span>
 
-	<ui:define name="ribbon">
-		<div id="datepicker"></div>
-		<span>View contracts issued over:</span><br/>
-		<select id="dspan" onchange="updateDays()">
-			<option value="1">1 month</option>
-			<option value="3">3 months</option>
-			<option value="6">6 months</option>
-			<option value="12">12 months</option>
-			<option value="18">18 months</option>
-			<option selected="selected" value="24">24 months</option>
-		</select>
-	</ui:define>
+            <div class="timeline" align="center">
+                <div id="cursor">
+                    <img src="resources/images/cursor.png" alt="cursor" />
+                </div>
+                <img src="resources/images/timeline.png" alt="timeline" />
+                <div id="number"></div>
+                <span style="font-size: 8pt;" id="dateText"></span>		
+            </div>
+        </ui:define>
 
-</ui:composition>
+        <ui:define name="pageContent">
+            <f:view contentType="text/html">
+
+                <div style="margin-top: 50px;">
+                    <div id="workerChart" style="width: 700px; height: 650px; clear: both;"></div>
+
+                    <h1>Contracts from <span id="selected_place"></span></h1>
+                    <div id="contract_list" style="width: 400px; position: relative; float: left">
+
+                    </div>
+                    <div style="width: 250px; position: relative; float: right">
+                        <h4>Destinations</h4>
+                        <div id="place_list">
+
+                        </div>
+                    </div>
+                </div>
+            </f:view>
+        </ui:define>
+
+        <ui:define name="ribbon">
+            <div id="datepicker"></div>
+            <div style="margin-bottom: 20px;">
+                <h2>Hiring Offices</h2>
+                <div id="hiringOffices">
+
+                </div>
+            </div>
+            <span>View contracts issued over:</span><br/>
+            <select id="dspan" onchange="updateDays()">
+                <option value="1">1 month</option>
+                <option value="3">3 months</option>
+                <option value="6">6 months</option>
+                <option value="12">12 months</option>
+                <option value="18">18 months</option>
+                <option selected="selected" value="24">24 months</option>
+            </select>
+            <p>Railroad Network Overlay<br/>
+                <select id="rn" onchange="updateRail()">
+                    <option value="none">None</option>
+                    <option value="1861">1861 Network</option>
+                    <option value="1870">1870 Network</option>
+                </select></p>
+        </ui:define>
+
+    </ui:composition>
 
 </html>
