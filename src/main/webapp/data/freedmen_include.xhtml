@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h1>Freedmen's Bureau Labor Statistics</h1>
+
+<h2>Description</h2>
+
+<p>
+    The Freedmen's Bureau Labor Statistics data set contains detailed records for work contracts issued to
+    emancipated slaves between Febuary 24, 1865 and July 14, 1867. Each record provides details about the
+    work being contracted, the individual to whom the contract was given, the hiring office issuing the
+    contract, and the location where the work was to be performed.
+</p>
+
+<h2>Schema</h2>
+The data set consists of the following 4 tables:
+<h3>contract</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>bigint</td>
+        <td class="desc">Identifier for the contract entry</td>
+    </tr>
+    <tr>
+        <td>COMMENTS</td>
+        <td>varchar</td>
+        <td>Misc. text comments for the contract</td>
+    </tr>
+    <tr>
+        <td>CONTRACTDATE</td>
+        <td>date</td>
+        <td>The date the contract was issued</td>
+    </tr>
+    <tr>
+        <td>EMPLOYERAGENT</td>
+        <td>varchar</td>
+        <td>The name of the employer</td>
+    </tr>
+    <tr>
+        <td>LENGTHOFSERVICEMONTHS</td>
+        <td>varchar</td>
+        <td>The duration of the contract - this field is a text field to accomodate issues from the original dataset</td>
+    </tr>
+
+    <tr>
+        <td>POSITION</td>
+        <td>varchar</td>
+        <td>The type of work being contracted</td>
+    </tr>
+
+    <tr>
+        <td>RATEOFPAY</td>
+        <td>varchar</td>
+        <td>The amount paid for service provided</td>
+    </tr>
+
+    <tr>
+        <td>RENUMERATION</td>
+        <td>varchar</td>
+        <td>Description of any additinal payment (room and board etc.) for service provided</td>
+    </tr>
+
+    <tr>
+        <td>WORKCLASS</td>
+        <td>varchar</td>
+        <td>The type of work / service provided</td>
+    </tr>
+
+    <tr>
+        <td>DESTINATION_ID</td>
+        <td>bigint</td>
+        <td>The foreign key to the destination table</td>
+    </tr>
+
+    <tr>
+        <td>OFFICE_ID</td>
+        <td>bigint</td>
+        <td>The foreign key to the hiring office table</td>
+    </tr>
+
+    <tr>
+        <td>WORKER_ID</td>
+        <td>bigint</td>
+        <td>The foreign key to the worker table</td>
+    </tr>
+</table>
+
+<h3>contractdestination</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>bigint</td>
+        <td class="desc">Identifier for the contract destination</td>
+    </tr>
+    <tr>
+        <td>COUNTY</td>
+        <td>varchar</td>
+        <td>The county in which the work or service were provided</td>
+    </tr>
+    <tr>
+        <td>STATE</td>
+        <td>varchar</td>
+        <td>The state in which the work or service were provided</td>
+    </tr>
+    <tr>
+        <td>TOWNSHIP</td>
+        <td>varchar</td>
+        <td>The township in which the work or service were provided</td>
+    </tr>
+    <tr>
+        <td>LATITUDE</td>
+        <td>float</td>
+        <td>The y coordinate of the location represented by the destination - a centroid value for state or county without township</td>
+    </tr>
+    <tr>
+        <td>LONGITUDE</td>
+        <td>float</td>
+        <td>The x coordinate of the location represented by the destination - a centroid value for state or county without township</td>
+    </tr>
+</table>
+
+<h3>hiringoffice</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>bigint</td>
+        <td class="desc">Identifier for the hiring office</td>
+    </tr>
+    <tr>
+        <td>NAME</td>
+        <td>varchar</td>
+        <td>The name of the office</td>
+    </tr>
+    <tr>
+        <td>LATITUDE</td>
+        <td>float</td>
+        <td>The y coordinate of the hiring office location</td>
+    </tr>
+    <tr>
+        <td>LONGITUDE</td>
+        <td>float</td>
+        <td>The x coordinate of the hiring office location</td>
+    </tr>
+</table>
+
+<h3>worker</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>bigint</td>
+        <td class="desc">Identifier for the worker</td>
+    </tr>
+    <tr>
+        <td>FIRSTNAME</td>
+        <td>varchar</td>
+        <td>The first name of the worker</td>
+    </tr>
+    <tr>
+        <td>LASTNAME</td>
+        <td>varchar</td>
+        <td>The last name of the worker</td>
+    </tr>
+    <tr>
+        <td>GENDER</td>
+        <td>varchar</td>
+        <td>The gender of the worker</td>
+    </tr>
+    <tr>
+        <td>LABEL</td>
+        <td>varchar</td>
+        <td>A misc. lable field generally containing the first and last name of the worker</td>
+    </tr>
+</table>
+
+<h3>Citation</h3>
+
+<p>
+    The Freedmen's Bureau labor contracts for each office are organized by state and office and available on microfilm. We consulted the following records:
+</p>
+
+<p>
+    Bureau of Refugees, Freedmen, and Abandoned Lands, Records of the field offices for Virginia, M 1913, Roll 52 "Alexandria Contracts, 5 September 1865 to 15 December 1866; Rolls 40, 156, 157, 160, 42, 47, and 48 Transportation Requests; Petersburg Labor Contracts, M 1913 Roll 160, 11 July 1865 to November 1865.
+</p>
+
+<p>
+    Bureau of Refugees, Freedmen, and Abandoned Lands, Records of the field offices for the District of Columbia, Bureau of Refugees, Freedmen, and Abandoned Lands, 1865-1870, Local Superintendent for Washington and Georgetown Records Relating to Employment of Freedmen, Letters Received by Employment Agents Jan. 19, 1866–Nov. 7, 1867, Employment Register Volume (88) July 3, 1867–Oct. 9, 1868, Employment Registers from Wisewell Barracks Volume 1 (91) Aug. 2, 1866–Aug. 10, 1868, Volume 2 (96), Aug. 2, 1866–Aug. 6, 1868, Employment Registers from East Capitol Street Barracks Volume 1 (90) Dec. 10, 1866–Feb. 26, 1868, Volume 2 (94) Dec. 4, 1866–Feb. 26, 1868, Labor Contracts Aug. 1865–Mar. 1867.
+</p>
+
+<p>
+    Records of the Field Offices for the State of Tennessee, Bureau of Refugees, Freedmen, and Abandoned Lands, 1865-1872, M 1911, Chattanooga, Roll 15 "Register of Contracts and Payrolls of Freedmen, Feb.1866-Jan.1867; Memphis, Roll 53 "Registers of Contracts, Vol. 1 Dec. 1866-Aug. 1867 and Vol. 2 1867. Records of the Assistant Commisssioner for the State of Tennessee, Bureau of Refugees, Freedmen and Abandoned Lands, 1865-1869, M 999, Rolls 20, 21, 22, 23, 24, 25, Jan. 1, 1865-Jan. 1, 1868; Records of the Assistant Commissioner for the State of Tennessee, Bureau of Refugees, Freedmen, and Abandoned Lands, 1865-1869. MS 999, Roll 23; Records Relating to Freedmen’s Labor Indentures of Apprenticeship, Dec. 1865-Feb. 1868 Contracts, Jan. 1, 1865-Jan. 1, 1868, Roll 23 Robertson-Shelby Counties​.
+</p>
+
+<p>
+    Records of the Field Offices for the State of Kentucky, Bureau of Refugees, Freedmen and Abandoned Lands, 1865-1872, M 1904, Roll 123 "Freedmen's Contracts" Volume Jan. 1866-July 1867; Office of the Assistant Commissioner , Rolls 64, 65, 66, 68, "Unbound Labor Contracts", 1865-1868 .
+</p>
+
+<p>
+    For finding aids, see National Archives and Records Administration, http://www.archives.gov/research/african-americans/freedmens-bureau.
+</p>
+
+</html>

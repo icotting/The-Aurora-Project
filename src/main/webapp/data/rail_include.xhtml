@@ -1,0 +1,325 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+<h1>Railroad Network GIS</h1>
+
+<h2>Description</h2>
+
+<p>
+    The Rail Network GIS data set includes the complete GIS for the growth of the US railway network from 1840 to 1900.
+    The data include both regional, state, and county rail systems and are comprised:
+</p>
+<ul>
+    <li>GIS polyline data for each segment of track</li>
+    <li>MySQL geocodes for each of the polylines to support spatial queries</li>
+    <li>Railline meta data</li>
+    <li>Aggregate county-level data for miles of track</li>
+    <li>US state and county boundary GIS</li>
+    <li>Depots and depot meta data</li>
+</ul>
+<p>
+    Track mile aggregation is derived from the polylines and are computed as follows:
+</p>
+
+<p style="margin-left: 20px">
+    Find all line segments L intersecting a county C in a year Y.<br/>
+    Define a sub-line SL<br/>
+    For each point P in L:<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;if P is within C => add P to SL<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;Compute length G of SL and add to a running total length of tracks for C<br/>
+    Loop
+</p>
+
+<p>County-level data are then rolled up to state based on the intersection of county and state boundaries.</p>
+
+<h2>Schema</h2>
+The data set consists of the following 7 tables:
+
+<h3>depotmetadatum</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>bigint</td>
+        <td class="desc">Identifier for the meta data item for the depot</td>
+    </tr>
+    <tr>
+        <td>ADDITIONALINFO</td>
+        <td>mediumtext</td>
+        <td>Developer notes detailing any additional information for the depot not field mapped</td>
+    </tr>
+    <tr>
+        <td>ARCHITECT</td>
+        <td>varchar</td>
+        <td>The architect of the depot</td>
+    </tr>
+    <tr>
+        <td>BUILDTYPE</td>
+        <td>varchar</td>
+        <td>The build type of the depot, one of: FRAME, BRICK, STONE</td>
+    </tr>
+    <tr>
+        <td>BUILDER</td>
+        <td>varchar</td>
+        <td>The name of the builder</td>
+    </tr>
+    <tr>
+        <td>BUILDERSTATE</td>
+        <td>varchar</td>
+        <td>The state from which the builder came</td>
+    </tr>
+    <tr>
+        <td>BUILDERTOWN</td>
+        <td>varchar</td>
+        <td>The town from which the builder came</td>
+    </tr>
+    <tr>
+        <td>COMMENTS</td>
+        <td>mediumtext</td>
+        <td>Misc. comments - none in this data set</td>
+    </tr>
+    <tr>
+        <td>CONSTRUCTIONCOST</td>
+        <td>float</td>
+        <td>The cost in USD of the construction of the depot</td>
+    </tr>
+    <tr>
+        <td>DAMAGECOST</td>
+        <td>float</td>
+        <td>The cost in USD to any damage caused to the depot</td>
+    </tr>
+    <tr>
+        <td>DAMAGEDESCRIPTION</td>
+        <td>varchar</td>
+        <td>A description, if any, of damage done to the depot</td>
+    </tr>
+    <tr>
+        <td>ENDDATE</td>
+        <td>date</td>
+        <td>The date on which the depot ended service</td>
+    </tr>
+    <tr>
+        <td>ENDMONTH</td>
+        <td>varchar</td>
+        <td>The month in which the depot ended service - used if the exact date is not known</td>
+    </tr>
+    <tr>
+        <td>ENDYEAR</td>
+        <td>int</td>
+        <td>The year in which the depot ended service - used if the exact date is not known</td>
+    </tr>
+    <tr>
+        <td>ENDYEARAUTHORITY</td>
+        <td>varchar</td>
+        <td>The authority for the ending year</td>
+    </tr>
+    <tr>
+        <td>LEGACYID</td>
+        <td>bigint</td>
+        <td>The ID mapping for the depot from the original dataset</td>
+    </tr>
+    <tr>
+        <td>NAME</td>
+        <td>varchar</td>
+        <td>The name of the depot</td>
+    </tr>
+    <tr>
+        <td>REBUILDCOST</td>
+        <td>float</td>
+        <td>The cost in USD to rebuild the depot</td>
+    </tr>
+    <tr>
+        <td>STARTDATE</td>
+        <td>date</td>
+        <td>The date on which depot service started</td>
+    </tr>
+    <tr>
+        <td>STARTMONTH</td>
+        <td>varchar</td>
+        <td>The month in which depot service started - used if exact date is not known</td>
+    </tr>
+    <tr>
+        <td>STARTYEAR</td>
+        <td>int</td>
+        <td>The year in which depot service started - used if the exact date is not known</td>
+    </tr>
+    <tr>
+        <td>STARTYEARAUTHORITY</td>
+        <td>varchar</td>
+        <td>The authority for the start year</td>
+    </tr>
+    <tr>
+        <td>STATIONTYPE</td>
+        <td>varchar</td>
+        <td>The type of station represented by this depot, one of: COMBINATION, COMBINATION DEPOT, UNION, JUNCTION (NOT DEPOT), JUNCTION, END POINT (NOT DEPOT), START OF LINE (NOT DEPOT)</td>
+    </tr>
+    <tr>
+        <td>TRAFFICTYPE</td>
+        <td>varchar</td>
+        <td>The type of traffic through the depot, one of: PF, P, F</td>
+    </tr>
+    <tr>
+        <td>TYPE</td>
+        <td>int</td>
+        <td>The depot type</td>
+    </tr>
+    <tr>
+        <td>DEPOT_ID</td>
+        <td>bigint</td>
+        <td>The foreign key to the depot table</td>
+    </tr>
+</table>
+
+<h3>depot</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+<h3>depot_geocodes</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+<h3>county_rail</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+<h3>rail_gis</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+<h3>boundary_coords</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>bigint</td>
+        <td class="desc">Identifier for the geospatial boundary polygon</td>
+    </tr>
+    <tr>
+        <td>BELONGS_TO</td>
+        <td>bigint</td>
+        <td>Foreign key mapping to nhgis_boundaries indicating the county or state to which the polygon belongs</td>
+    </tr>
+    <tr>
+        <td>COORDS</td>
+        <td>longtext</td>
+        <td>The coordinate string for the polygon in the format of X,Y X,Y ...</td>
+    </tr>
+    <tr>
+        <td>INNER_POLY</td>
+        <td>tinyint</td>
+        <td>Flag indicating if the polygon is interior to a parent boundary</td>
+    </tr>
+</table>
+
+<h3>nhgis_boundaries</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>bigint</td>
+        <td class="desc">Identifier for the geospatial region (county or state)</td>
+    </tr>
+    <tr>
+        <td>COUNTY_NAME</td>
+        <td>varchar</td>
+        <td>The name of the county if the region describes the same</td>
+    </tr>
+    <tr>
+        <td>STATE_NAME</td>
+        <td>varchar</td>
+        <td>The name of the state or the name of the state to which the county belongs</td>
+    </tr>
+    <tr>
+        <td>YEAR</td>
+        <td>int</td>
+        <td>The year in which the region came into being (i.e. West Virginia etc.)</td>
+    </tr>
+    <tr>
+        <td>SOURCE_ID</td>
+        <td>bigint</td>
+        <td>The NHGIS source ID to link back to the original data set</td>
+    </tr>
+    <tr>
+        <td>GEO</td>
+        <td>multipolygon</td>
+        <td>The MySQL geocodes for the region; this is a composite of all boundary geocodes encoded for SQL spatial extensions</td>
+    </tr>
+</table>
+
+<h3>Citation</h3>
+<p>
+We found that digitizing historical maps and capturing line data from them resulted in wide variation and inaccuracies. Our experience led us to create a process that includes:
+</p>
+<p>
+a.) working from the current Tiger line data on railroads as a base network--Railroads present before 1900 but abandoned before 1970 need to be added back in and we use a background of known hydrological and population features at the 1:100,000 scale with the historical sources as a guide to depots and line routes.
+</p>
+<p>
+b.) using the extensive archival railroad record maps held in archives and assembling a base bibliography of these maps for references and chronological growth of the system--This provides scholars with a large online publication of relevant map resources on these railroads, including the collection of the Library of Congress railroad maps, as well as map sources at the Hagley Museum, Railroad Museum of Pennsylvania, the Newberry Library, the New York Public Library, the British Library, and the Nebraska State Historical Society.
+</p>
+<p>
+c.) creating consistent and thorough metadata capture for each aspect of the GIS
+</p>
+<p>
+d.) taking a scope of detail and resolution to all railroads of 10 miles or greater basis, subject to connectivity on a larger line. 
+</p>
+<p>
+e.) working toward as close to one year intervals as possible for the period 1830-1900, using annual reports to document line building and depot activity.
+</p>
+</html>
