@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:body>
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>the Aurora Project | digging into multiple dimensions of data</title>
+		
+		<ui:insert name="styles"></ui:insert>	
+		
+		<!--[if IE]>
+		<style type="text/css">
+		    .content{
+		        top:0px;
+		    }
+		    
+		    .footer{
+		        top:0px;
+		    }
+		</style>
+		<![endif]-->
+		
+		<link rel="stylesheet" type="text/css" media="screen" href="../resources/styles/main.css" />
+
+		<link rel="stylesheet" type="text/css"
+			href="../resources/styles/jquery-ui-1.8.6.custom.css" />
+	
+		<script type="text/javascript" src="../resources/js/jquery-1.6.2.js"></script>
+		<script type="text/javascript" src="../resources/js/jquery-ui-1.8.13.custom.min.js"></script>
+		<ui:insert name="scripts"></ui:insert>	
+		
+	</h:head>
+	<div align="center">
+	<div class="content" align="center">
+    	<div class="leftCol logo">
+        <!-- Primary logo, link back to homepage -->
+            <a href="../index.html"><img src="../resources/images/template/logo.png" alt="the Aurora Project" border="0" /></a>
+		</div>
+        <div class="rightCol" align="left">
+        <!-- main navigation -->
+			<!-- <div class="search"><form><input type="text" /></form></div> -->
+	        <img src="../resources/images/template/logoText.png" alt="the Aurora Project" border="0" />
+		</div>
+        <div style="clear:both"></div>
+
+        <div class="navigation" align="right">
+       		<ui:insert name="appNav">
+       			<a href="">Interactive Data</a><a href="">Scholarly Interpretation</a><a href="">Developer Resources</a><a href="">About the Data</a>
+        	</ui:insert>
+        </div>
+                
+        <div class="leftCol">
+			<ui:insert name="ribbon">
+
+			</ui:insert>   
+        </div>
+       
+        <!-- single col layout -->
+        <div class="rightCol" style="height: 100%;" align="left">
+            <ui:insert name="pageContent">
+                
+			</ui:insert>
+		</div>        
+		<div style="clear:both"></div>
+        
+    </div>
+	
+    
+    <div class="footer" align="left">
+    
+    	<ui:insert name="additionalFooter">
+           
+       </ui:insert>
+ 
+	  	<ul>
+	        	<li>The team
+	            <ul>
+	        		<li><a href="http://cdrh.unl.edu/">UNL Center for Digital Research in the Humanities</a></li>
+	        		<li><a href="http://www.port.ac.uk/departments/academic/geography/">University of Portsmouth Department of Geography</a></li>
+	        		<li><a href="http://cse.unl.edu">UNL Computer Science and Engineering Department, Computing Innovation Group</a></li>
+	        		<li><a href="http://www.stanford.edu/group/spatialhistory/cgi-bin/site/index.php">Stanford University Spatial History Project</a></li>
+				</ul></li>
+	        	<li>The apps
+	            <ul>
+	        		<li><a href="railroads.xhtml">Railroad Network Connectivity</a></li>
+	        		<li><a href="dailydispatch.xhtml">The Civil War and Mobility</a></li>
+     				<li><a href="population.xhtml">Slavery and the Expansion of the Railroad</a></li>
+	        		<li><a href="policitcs.xhtml">The Politics of Railroad Expansion</a></li>
+	        		<li><a href="freedman.xhtml">African American Mobility after Emancipation</a></li>
+				</ul></li>
+	 		</ul>        
+	         
+	       <p> &copy; 2011 All Rights Reserved. William G. Thomas, III, Richard G. Healey, Ian J. Cottingham, the University of Nebraska Board of Regents.  <a href="">Creative Commons CC BY-SA</a>
+	       		<br />
+	            <img src="../resources/images/template/cc.jpg" alt="creative commons" /><br /><br />
+	            <img src="../resources/images/template/digging.jpg" alt="digging into data" /><br />
+	
+	       </p>   
+    </div>
+
+</div>
+
+</h:body>
+</html>

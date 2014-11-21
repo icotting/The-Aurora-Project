@@ -265,3 +265,11 @@ border:4px solid #ffffff;
 #textSection ul li { margin-bottom: 10px; }
 
 th { text-align: left; }
+
+.desc {
+    width: 70%;
+}
+
+.db {
+    width: 100%;
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h1>US Census Records</h1>
+
+<h2>Description</h2>
+
+<p>
+    The US Census Records data set contains population counts for
+    slaves, free persons, and other classified persons for each
+    census year from 1840 through 1870. Data are reported at US
+    state and county levels.
+</p>
+
+<p>
+    In addition to population data extracted from census records,
+    the data set includes geocoded and raw polygon representations
+    of each of the states or counties for which census data could be
+    extracted. These data can be used to preform geospaital SQL
+    queries on the data or to visualize the boundaries on a map.
+</p>
+
+<h2>Schema</h2>
+The data set consists of the following 3 tables:
+<h3>boundary_coords</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>bigint</td>
+        <td class="desc">Identifier for the geospatial boundary polygon</td>
+    </tr>
+    <tr>
+        <td>BELONGS_TO</td>
+        <td>bigint</td>
+        <td>Foreign key mapping to nhgis_boundaries indicating the county or state to which the polygon belongs</td>
+    </tr>
+    <tr>
+        <td>COORDS</td>
+        <td>longtext</td>
+        <td>The coordinate string for the polygon in the format of X,Y X,Y ...</td>
+    </tr>
+    <tr>
+        <td>INNER_POLY</td>
+        <td>tinyint</td>
+        <td>Flag indicating if the polygon is interior to a parent boundary</td>
+    </tr>
+</table>
+<h3>nhgis_boundaries</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>bigint</td>
+        <td class="desc">Identifier for the geospatial region (county or state)</td>
+    </tr>
+    <tr>
+        <td>COUNTY_NAME</td>
+        <td>varchar</td>
+        <td>The name of the county if the region describes the same</td>
+    </tr>
+    <tr>
+        <td>STATE_NAME</td>
+        <td>varchar</td>
+        <td>The name of the state or the name of the state to which the county belongs</td>
+    </tr>
+    <tr>
+        <td>YEAR</td>
+        <td>int</td>
+        <td>The year in which the region came into being (i.e. West Virginia etc.)</td>
+    </tr>
+    <tr>
+        <td>SOURCE_ID</td>
+        <td>bigint</td>
+        <td>The NHGIS source ID to link back to the original data set</td>
+    </tr>
+    <tr>
+        <td>GEO</td>
+        <td>multipolygon</td>
+        <td>The MySQL geocodes for the region; this is a composite of all boundary geocodes encoded for SQL spatial extensions</td>
+    </tr>
+</table>
+<h3>population_data</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>bigint</td>
+        <td class="desc">Identifier for the census entry</td>
+    </tr>
+    <tr>
+        <td>YEAR</td>
+        <td>int</td>
+        <td>The census year</td>
+    </tr>
+    <tr>
+        <td>NHGIS_BOUNDARY</td>
+        <td>bigint</td>
+        <td>The foreign key to the region for which the census figure applies</td>
+    </tr>
+    <tr>
+        <td>SLAVE_POPULATION</td>
+        <td>int</td>
+        <td>The number of slaves reported in the state or county</td>
+    </tr>
+    <tr>
+        <td>NON_SLAVE_POPULATION</td>
+        <td>int</td>
+        <td>The number of free persons reported in the state or county</td>
+    </tr>
+    <tr>
+        <td>OTHER_POPULATION</td>
+        <td>int</td>
+        <td>The number of other reported in the state or county</td>
+    </tr>
+    <tr>
+        <td>TOTAL_POPULATION</td>
+        <td>int</td>
+        <td>The total number of persons reported in the state or county</td>
+    </tr>
+</table>
+
+<h3>Citation</h3>
+
+<p>Minnesota Population Center. National Historical Geographic Information System: Version 2.0. Minneapolis, MN: University of Minnesota 2011.</p>
+
+<p>The College of William and Mary and the Minnesota Population Center. School Attendance Boundary Information System (SABINS): Version 1.0. Minneapolis, MN: University of Minnesota 2011.</p>
+
+
+</html>

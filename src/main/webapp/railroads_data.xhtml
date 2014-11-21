@@ -7,23 +7,19 @@
     <ui:composition template="./resources/templates/text.xhtml">
 
         <ui:define name="appNav">
-            <a href="./population.xhtml">Slavery and the Growth of the Railroad</a><a href="./population_scholar.xhtml">Scholarly Interpretation</a><a class="selectednav" href="">About the Data</a>
+            <a href="./railroads.xhtml">Railroad Network Connectivity</a><a href="./railroads_scholar.xhtml">Scholarly Interpretation</a><a class="selectednav" href="">About the Data</a>
         </ui:define>
 
 
         <ui:define name="pageContent">
             <div id="textSection">
-                <ui:include src="./data/census_include.xhtml"/>
-                <div style="margin-top: 30px;">
-                    <ui:include src="./data/rail_include.xhtml"/>
-                </div>
+                <ui:include src="./data/rail_include.xhtml"/>
             </div>
         </ui:define>
 
         <ui:define name="ribbon">
             <h3>Data Downloads</h3>
             <ul>
-                <li><a href="http://cig-production.unl.edu/census.sql.zip">Census Dataset</a></li>
                 <li><a href="http://cig-production.unl.edu/rail.sql.zip">Railroad GIS Dataset</a></li>
             </ul>
         </ui:define>

@@ -4,26 +4,20 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 
-    <ui:composition template="./resources/templates/text.xhtml">
+    <ui:composition template="../resources/templates/data.xhtml">
 
         <ui:define name="appNav">
-            <a href="./population.xhtml">Slavery and the Growth of the Railroad</a><a href="./population_scholar.xhtml">Scholarly Interpretation</a><a class="selectednav" href="">About the Data</a>
+
         </ui:define>
 
 
         <ui:define name="pageContent">
-            <div id="textSection">
-                <ui:include src="./data/census_include.xhtml"/>
-                <div style="margin-top: 30px;">
-                    <ui:include src="./data/rail_include.xhtml"/>
-                </div>
-            </div>
+            <ui:include src="rail_include.xhtml"/>
         </ui:define>
 
         <ui:define name="ribbon">
             <h3>Data Downloads</h3>
             <ul>
-                <li><a href="http://cig-production.unl.edu/census.sql.zip">Census Dataset</a></li>
                 <li><a href="http://cig-production.unl.edu/rail.sql.zip">Railroad GIS Dataset</a></li>
             </ul>
         </ui:define>

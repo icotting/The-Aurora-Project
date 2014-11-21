@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h1>Richmond Daily Dispatch Places</h1>
+
+<h2>Description</h2>
+
+<p>
+    This data set represents a relational model extracted from the Richmond Daily Dispatch (see citation) XML files
+    and reviewed as part of the Aurora Project. The data set includes place names (city, state, county, country etc.)
+    extracted from volumes of the Richmond Daily Dispatch between October 31, 1860 and Febuary 9, 1866. The actual
+    text associated with places is also included for reference and context analysis.
+</p>
+
+<h2>Schema</h2>
+The data set consists of the following 6 tables:
+<h3>alt_places</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>PlaceOccurrence_ID</td>
+        <td>bigint</td>
+        <td class="desc">the ID of the occurrence of a named place</td>
+    </tr>
+    <tr>
+        <td>alternatePlaces_ID</td>
+        <td>bigint</td>
+        <td>The ID of a possible alternate place in the master place name table</td>
+    </tr>
+</table>
+
+<h3>dispatchvolume</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>bigint</td>
+        <td class="desc">Identifier for a published volume of the newspaper</td>
+    </tr>
+    <tr>
+        <td>filename</td>
+        <td>varchar</td>
+        <td>The name of the XML file from the original dataset</td>
+    </tr>
+    <tr>
+        <td>volumedate</td>
+        <td>date</td>
+        <td>The date on which the volume was published</td>
+    </tr>
+</table>
+
+<h3>place</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>bigint</td>
+        <td class="desc">Identifier for the unique place</td>
+    </tr>
+    <tr>
+        <td>reviewed</td>
+        <td>tinyint</td>
+        <td>A boolean flag indicating whether or not the place reference was reviewed</td>
+    </tr>
+    <tr>
+        <td>legacyid</td>
+        <td>varchar</td>
+        <td>The unique identifier of the place in the original XML dataset</td>
+    </tr>
+    <tr>
+        <td>name</td>
+        <td>varchar</td>
+        <td>The place name</td>
+    </tr>
+    <tr>
+        <td>longitude</td>
+        <td>float</td>
+        <td>The x coordinate of the place</td>
+    </tr>
+    <tr>
+        <td>latitude</td>
+        <td>float</td>
+        <td>The y coordinate of the place</td>
+    </tr>
+    <tr>
+        <td>deleted</td>
+        <td>tinyint</td>
+        <td>A boolean flag indicating whether or not the reviewer wanted the place removed</td>
+    </tr>
+</table>
+
+<h3>placeoccurrence</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>bigint</td>
+        <td class="desc">Identifier for occurrence of a place in text</td>
+    </tr>
+    <tr>
+        <td>reviewed</td>
+        <td>tinyint</td>
+        <td>A boolean flag indicating whether or not the place occurrence was reviewed</td>
+    </tr>
+    <tr>
+        <td>actualtext</td>
+        <td>varchar</td>
+        <td>The text text for the place name as found in the text of the newspaper</td>
+    </tr>
+    <tr>
+        <td>sentence_id</td>
+        <td>bigint</td>
+        <td>The foreign key to the sentence table linking to the sentence in which the place occurrence is found</td>
+    </tr>
+    <tr>
+        <td>place_id</td>
+        <td>bigint</td>
+        <td>The foreign key to the place table for the specific occurrence</td>
+    </tr>
+</table>
+
+<h3>sentence</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>bigint</td>
+        <td class="desc">Identifier for the sentence extracted from a dispatch volume</td>
+    </tr>
+    <tr>
+        <td>text</td>
+        <td>varchar</td>
+        <td>The text of the sentence</td>
+    </tr>
+    <tr>
+        <td>number</td>
+        <td>int</td>
+        <td>The sentence number of the dispatch volume</td>
+    </tr>
+    <tr>
+        <td>volume_id</td>
+        <td>bigint</td>
+        <td>The foreign key dispatchvolume table for the volume in which the sentence is found</td>
+    </tr>
+</table>
+
+<h3>reviewnote</h3>
+<table class="db">
+    <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>ID</td>
+        <td>bigint</td>
+        <td class="desc">Identifier for the note provided by a reviewer for a place or place occurrence</td>
+    </tr>
+    <tr>
+        <td>action</td>
+        <td>varchar</td>
+        <td>A description of the action taken by the reviewer (No Action, Delete Point, Needs Additional Review)</td>
+    </tr>
+    <tr>
+        <td>reviewedon</td>
+        <td>date</td>
+        <td>The date on which the place or place occurrence was reviewed</td>
+    </tr>
+    <tr>
+        <td>comment</td>
+        <td>varchar</td>
+        <td>Any comments provided by the reviewer to support their action</td>
+    </tr>
+    <tr>
+        <td>place_id</td>
+        <td>bigint</td>
+        <td>The foreign key to the place table</td>
+    </tr>
+    <tr>
+        <td>occurrence_id</td>
+        <td>bigint</td>
+        <td>The foreign key to the place occurrence table</td>
+    </tr>
+</table>
+
+<h3>Citation</h3>
+
+<p>Richmond Daily Dispatch, 1860-1865, University of Richmond Libraries, http://dlxs.richmond.edu/d/ddr/techinfo.html</p>
+</html>

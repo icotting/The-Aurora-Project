@@ -53,11 +53,6 @@
             <id>Glassfish</id>
             <url>http://download.java.net/maven/glassfish/</url>
         </pluginRepository>
-        <pluginRepository>
-            <id>jrebel</id>
-            <name>zeroturnaround plugin repository</name>
-            <url>http://repos.zeroturnaround.com/maven2/org/zeroturnaround/javarebel-maven-plugin/</url>
-        </pluginRepository>
     </pluginRepositories>
     <repositories>
         <repository>
@@ -78,20 +73,6 @@
                     <target>1.6</target>
                     <debug>true</debug>
                 </configuration>
-            </plugin>
-                        
-            <plugin>
-                <groupId>org.zeroturnaround</groupId>
-                <artifactId>jrebel-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>generate-rebel-xml</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
